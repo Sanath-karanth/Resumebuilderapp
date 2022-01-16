@@ -2,16 +2,12 @@ import React, { Fragment,useState } from 'react';
 import { Link } from "react-router-dom";
 import {Navbar,Nav,Container,Row,Col,Button,Card} from 'react-bootstrap'
 import logo from '../logo.svg';
-import { Document, Page } from 'react-pdf';
+
 
 const DashboardScreen = (props) => {
 
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
-
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-      }
 
     return (
         <div className="AppContainer">
@@ -34,19 +30,47 @@ const DashboardScreen = (props) => {
                 <Row>
                     <Col xs={4}>
                         <Card>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                            <Card.Body>
+                                <Card>
+                                    <Card.Body>This is some text within a card body.</Card.Body>
+                                </Card>
+                            </Card.Body>
                         </Card>
                     </Col>
                     <Col xs={8}>
                         <Card>
-                            <Card.Body>This is some text within a card body.</Card.Body>
+                           <div
+                            style={{
+                                // height: '50rem',
+                                // width: '50rem',
+                                // margin: 50 ,
+                                padding:30,
+                                justifyContent:'center',
+                                alignItems:'center',
+                                alignContent:'center'
+                            }}>
+                            <embed
+                                src={'./sample.pdf'}
+                                type="application/pdf"
+                                height={600}
+                                // width={600}
+                                width="100%"
+                            />
+                        </div>
                         </Card>
-                        <Document
-                            file="https://arxiv.org/pdf/quant-ph/0410100.pdf"
-                            onLoadSuccess={onDocumentLoadSuccess}
-                        >
-                            <Page pageNumber={pageNumber} />
-                        </Document>
+                        <div
+                            style={{
+                                height: '50rem',
+                                width: '50rem',
+                                margin: '1rem auto',
+                            }}>
+                            {/* <embed
+                                src={'./sample.pdf'}
+                                type="application/pdf"
+                                height={800}
+                                width={800}
+                            /> */}
+                        </div>
                     </Col>
                 </Row>
                 
