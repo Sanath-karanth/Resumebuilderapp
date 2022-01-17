@@ -1,0 +1,17 @@
+
+.navheadertext{
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    color:'blue'
+}
+
+.navheadersubtext{
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.selecttext{
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+}
