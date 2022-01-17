@@ -30,7 +30,7 @@ const DashboardScreen = (props) => {
             </Navbar>
             </Container>
 
-            <Container fluid className="pt-4">
+            <Container fluid className="pt-4 pb-4">
                 <Row>
                     <Col xs={4}>
                         <Card>
