@@ -9,8 +9,30 @@ import '../css/dashboard.css'
 
 const DashboardScreen = (props) => {
 
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
+    const [isCheck,setIscheck] = useState(true);
+    const [RadioVal, setRadioVal] = useState('Resume 1');
+    const [colorVal, setColorVal] = useState('#FFFFFF');
+
+    const handleRadioChange = (e) => {
+        console.log("radio value is "+ e.target.value)
+        setRadioVal(e.target.value)
+        // setIscheck(!isCheck);
+    }
+
+    const resumeData = [
+        {
+            resumeID:97,
+            resumeName:'Resume 1',
+            labelOption:'option-1',
+            resumeImg:'../resumes/Resume1.jpg'
+        },
+        {
+            resumeID:98,
+            resumeName:'Resume 2',
+            labelOption:'option-2',
+            resumeImg:'../resumes/Resume1.jpg'
+        }
+    ]
 
     return (
         <div className="AppContainer">
@@ -35,10 +57,25 @@ const DashboardScreen = (props) => {
                     <Col xs={4}>
                         <Card>
                             <Card.Body>
-                            <p className='selecttext'>Select the Resume:</p>
-                                <Card>
-                                    <Card.Body>This is some text within a card body.</Card.Body>
-                                </Card>
+                                <p className='selecttext'>Select the Resume:</p>
+                                {resumeData.map((item,key) => {
+                                    return(
+                                            <div key={key} className="wrapper" style={{backgroundColor: RadioVal === item.resumeName ? '#f5fffa': '#FFFFFF'}}>   
+                                                <label>
+                                                    <input
+                                                        type="radio" 
+                                                        id={item.resumeID} 
+                                                        name='Radio' 
+                                                        value={item.resumeName}
+                                                        onChange={handleRadioChange}
+                                                        checked={RadioVal === item.resumeName? isCheck: false}
+                                                        >
+                                                    </input>
+                                                    <span>{item.resumeName}</span>
+                                                </label>
+                                            </div>
+                                    )
+                                })}
                             </Card.Body>
                         </Card>
                     </Col>
