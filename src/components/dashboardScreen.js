@@ -1,5 +1,5 @@
 import React, { Fragment,useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 import {Navbar,Nav,Container,Row,Col,Button,Card} from 'react-bootstrap'
 import logo from '../logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,14 +9,29 @@ import '../css/dashboard.css'
 
 const DashboardScreen = (props) => {
 
-    const [isCheck,setIscheck] = useState(true);
     const [RadioVal, setRadioVal] = useState('Resume 1');
-    const [colorVal, setColorVal] = useState('#FFFFFF');
+    const [idVal, setIdVal] = useState(97);
+    const navigate = useNavigate();
 
     const handleRadioChange = (e) => {
-        console.log("radio value is "+ e.target.value)
+        console.log("radio value is "+ e.target.id)
         setRadioVal(e.target.value)
-        // setIscheck(!isCheck);
+        setIdVal(e.target.id);
+    }
+
+    const filterforImage = (item) => {
+        if(item.resumeName === RadioVal)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+
+    const proceedClick = () => {
+        navigate("/resumeform", { state: {resumeid: idVal, resumename: RadioVal }});
     }
 
     const resumeData = [
@@ -30,7 +45,7 @@ const DashboardScreen = (props) => {
             resumeID:98,
             resumeName:'Resume 2',
             labelOption:'option-2',
-            resumeImg:'../resumes/Resume1.jpg'
+            resumeImg:'../resumes/Resume2.jpg'
         }
     ]
 
@@ -54,32 +69,38 @@ const DashboardScreen = (props) => {
 
             <Container fluid className="pt-4 pb-4">
                 <Row>
-                    <Col xs={4}>
+                    <Col sm={4}>
                         <Card>
                             <Card.Body>
                                 <p className='selecttext'>Select the Resume:</p>
                                 {resumeData.map((item,key) => {
                                     return(
-                                            <div key={key} className="wrapper" style={{backgroundColor: RadioVal === item.resumeName ? '#f5fffa': '#FFFFFF'}}>   
-                                                <label>
-                                                    <input
-                                                        type="radio" 
-                                                        id={item.resumeID} 
-                                                        name='Radio' 
-                                                        value={item.resumeName}
-                                                        onChange={handleRadioChange}
-                                                        checked={RadioVal === item.resumeName? isCheck: false}
-                                                        >
-                                                    </input>
-                                                    <span>{item.resumeName}</span>
-                                                </label>
-                                            </div>
+                                    <div key={key} className="wrapper" style={{backgroundColor: RadioVal === item.resumeName ? '#f5fffa': '#FFFFFF'}}>   
+                                        <label>
+                                            <input
+                                                type="radio" 
+                                                id={item.resumeID} 
+                                                name='Radio' 
+                                                value={item.resumeName}
+                                                onChange={handleRadioChange}
+                                                checked={RadioVal === item.resumeName? true: false}
+                                                >
+                                            </input>
+                                            <span>{item.resumeName}</span>
+                                        </label>
+                                    </div>
                                     )
                                 })}
                             </Card.Body>
                         </Card>
+                        <div className="d-grid pt-3 pb-3">
+                            <Button variant="dark" size="md" onClick={proceedClick}>
+                                PROCEED 
+                            </Button>
+                        </div>
+                        
                     </Col>
-                    <Col xs={8}>
+                    <Col sm={8}>
                         <Card>
                            <div
                             style={{
@@ -91,13 +112,29 @@ const DashboardScreen = (props) => {
                                 alignItems:'center',
                                 alignContent:'center'
                             }}>
-                            <embed
+                               
+                               <Card 
+                                style={{justifyContent:'center',
+                                        alignItems:'center',
+                                        alignContent:'center'}}>
+                               {resumeData.filter(filterforImage).map((item,key) => {
+                                    return(
+                                    <img 
+                                        key={key} 
+                                        src={item.resumeImg} 
+                                        alt={item.resumeName} 
+                                        width="100%" 
+                                        height="auto"> 
+                                    </img>)
+                                })}
+                               </Card> 
+                            {/* <embed
                                 src={'./sample.pdf'}
                                 type="application/pdf"
                                 height={600}
                                 // width={600}
                                 width="100%"
-                            />
+                            /> */}
                         </div>
                         </Card>
                         {/* <div
