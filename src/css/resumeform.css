@@ -1,0 +1,47 @@
+
+.navheadertext{
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    color:'blue'
+  }
+  
+  .navheadersubtext{
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .leftcardheadertext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    /* color:'blue';
+    justify-content: center;
+    align-items: center;
+    align-content: center; */
+  }
+
+  .backicon {
+      size: 30px;
+  }
+
+  .leftContainer {
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .leftcardskilltext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+  }
+    
+  .leftcardprojecttext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+  }
+  
+
+  
+  
+  
+  

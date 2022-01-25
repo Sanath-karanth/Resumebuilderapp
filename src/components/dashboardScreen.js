@@ -31,7 +31,7 @@ const DashboardScreen = (props) => {
     }
 
     const proceedClick = () => {
-        navigate("/resumeform", { state: {resumeid: idVal, resumename: RadioVal }});
+        navigate("/resumeform", { replace: true , state: {resumeid: idVal, resumename: RadioVal }});
     }
 
     const resumeData = [
