@@ -243,7 +243,7 @@ function ResumeformScreen(props) {
                 onHide={() => setSuggestmodalShow(false)}
             />
                 <Row>
-                    <Col sm={7}>
+                    <Col md={5}>
                         <Card className='leftContainer'>
                             
                             <div className='p-4'>
@@ -586,9 +586,76 @@ function ResumeformScreen(props) {
                             </div>
                         </Card>
                     </Col>
-                    <Col sm={5}>
-                        <Card>
-                            <p>Forms 2</p>
+                    <Col md={7}>
+                        <Card className='p-4'>
+                            <Container className='p-4'>
+                                <Row>
+                                    <Col md={8} className='pt-3'>
+                                        <div>
+                                            <h4 className='nametext'>Sanath S Karanth</h4>
+                                            <h5 className='roletext'>Fresher</h5>
+                                            <p>To work in a firm with a professional work driven environment where I can utilize and apply my knowledge, skills which would enable me as a fresh graduate to grow while fulfilling organizational goals.</p>
+                                        </div>
+                                    </Col>
+                                    {/* <Col sm={1}></Col> */}
+                                    <Col md={4} className='pt-3'>
+                                        <div className='ml-4' style={{paddingLeft:30}}>
+                                            <p className='mailtext'>
+                                                <span>
+                                                    <FontAwesomeIcon size="lg" icon={faEnvelope} />
+                                                </span>&nbsp; 
+                                                sanathsk97@gmail.com
+                                            </p>
+                                            <p className='phonetext'>
+                                                <span>
+                                                    <FontAwesomeIcon size="lg" rotation={90} icon={faPhone} />
+                                                </span>&nbsp; 
+                                                +91 94496 85219
+                                            </p>
+                                        </div>
+                                        
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={8} className='pt-2'>
+                                        <div>
+                                            <p className='workexperiencetext text-info pt-3'>Work Experience</p>
+                                            <h4 className='projecttext'>Project 1</h4>
+                                            <h5 className='developertext'>Technologies used: ReactJS,HTML,CSS</h5>
+                                            <ul>
+                                                <li>Created responsive web pages, mobile applications, and landing pages based on the requirements.</li>
+                                                <li>Developed standard and responsive web User Interfaces with a mobile-first approach using HTML, CSS, Bootstrap and Material-UI grid system, and API integrations using AXIOS package.</li>
+                                            </ul>
+                                        </div>
+                                        <div className='pt-4'>
+                                            <h4 className='projecttext'>Project 2</h4>
+                                            <h5 className='developertext'>Technologies used: ReactJS,HTML,CSS</h5>
+                                            <ul>
+                                                <li>Created responsive web pages, mobile applications, and landing pages based on the requirements.</li>
+                                                <li>Developed standard and responsive web User Interfaces with a mobile-first approach using HTML, CSS, Bootstrap and Material-UI grid system, and API integrations using AXIOS package.</li>
+                                            </ul>
+                                        </div>
+                                    </Col>
+                                    <Col md={1}></Col>
+                                    <Col md={3} className='pt-2'>
+                                        <div>
+                                            <p className='skillstext text-info pt-3'>Skills</p>
+                                            <h5 className='skilllisttext'>ReactJS</h5>
+                                            <h5 className='skilllisttext'>HTML</h5>
+                                            <h5 className='skilllisttext'>CSS</h5>
+                                            <h5 className='skilllisttext'>Bootstrap</h5>
+                                            <h5 className='skilllisttext'>Material-UI</h5>
+                                            <h5 className='skilllisttext'>Python</h5>
+                                        </div>
+                                        <div>
+                                            <p className='educationtext text-info pt-4'>Education</p>
+                                            <h5 className='degreetext'>BE (Computer Science)</h5>
+                                            <h5 className='universitytext'>Visvesvaraya Technological University</h5>
+                                            <h5 className='yeartext'>June 2015-2019</h5>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Container>
                         </Card>
                     </Col>
                 </Row>

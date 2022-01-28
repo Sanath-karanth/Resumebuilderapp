@@ -39,8 +39,85 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
   }
-  
 
+
+
+  /* -------------------------  Right Card design  ------------------------ */
+
+
+  .nametext {
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+  }
+
+  .roletext {
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+  }
+  
+  .mailtext {
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .phonetext {
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .workexperiencetext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+
+  .skillstext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+
+  .projecttext {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .developertext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .skilllisttext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .educationtext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+
+  .degreetext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+  }
+
+  .universitytext {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .yeartext {
+    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+  }
   
   
   
