@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { Link,useNavigate,useLocation  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faAngleLeft, faUser, faEnvelope, faPhone, faSuitcase,faInfoCircle,faLightbulb, faGraduationCap, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faAngleLeft, faUser, faEnvelope, faPhone, faSuitcase,faInfoCircle,faLightbulb, faGraduationCap, faAward } from '@fortawesome/free-solid-svg-icons'
 import {Navbar,Nav,Container,Row,Col,Button,Card,Modal,Tooltip,OverlayTrigger, Accordion} from 'react-bootstrap'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -25,6 +25,10 @@ function ResumeformScreen(props) {
     const [isselectLoading, setIsselectLoading] = useState(true);
     const [progSelectval, setProgSelectval] = useState('');
     const [eduSelectval, setEduSelectval] = useState('');
+    const [monthfrom, setMonthfrom] = useState('');
+    const [monthto, setMonthto] = useState('');
+    const [certificateMonth, setCertificateMonth] = useState('');
+    const [certificateYear, setCertificateyear] = useState('');
     const [yearfromval, setFromyearval] = useState('');
     const [yeartoval, setToyearval] = useState('');
 
@@ -56,6 +60,22 @@ function ResumeformScreen(props) {
     const educationSelect = (e) => {
         console.log(e.target.value);
         setEduSelectval(e.target.value);
+    }
+
+    const monthfromSelect = (e) => {
+        setMonthfrom(e.target.value);
+    }
+
+    const monthtoSelect = (e) => {
+        setMonthto(e.target.value);
+    }
+
+    const certificatemonthSelect = (e) => {
+        setCertificateMonth(e.target.value);
+    }
+
+    const certificateyearSelect = (e) => {
+        setCertificateyear(e.target.value);
     }
 
     const InfoClick = () => {
@@ -126,6 +146,36 @@ function ResumeformScreen(props) {
         
       ];
     
+      const monthNames = [
+        { month: 'January', label: 'January'},
+        { month: 'February', label: 'February'},
+        { month: 'March', label: 'March'},
+        { month: 'April', label: 'April'},
+        { month: 'May', label: 'May'},
+        { month: 'June', label: 'June'},
+        { month: 'July', label: 'July'},
+        { month: 'August', label: 'August'},
+        { month: 'September', label: 'September'},
+        { month: 'October', label: 'October'},
+        { month: 'November', label: 'November'},
+        { month: 'December', label: 'December'},
+      ];
+
+      const yearData = [
+        { year: '2010', label: '2010'},
+        { year: '2011', label: '2011'},
+        { year: '2012', label: '2012'},
+        { year: '2013', label: '2013'},
+        { year: '2014', label: '2014'},
+        { year: '2015', label: '2015'},
+        { year: '2016', label: '2016'},
+        { year: '2017', label: '2017'},
+        { year: '2018', label: '2018'},
+        { year: '2019', label: '2019'},
+        { year: '2020', label: '2020'},
+        { year: '2021', label: '2021'},
+        { year: '2022', label: '2022'},
+      ];
       
       function SuggesionModal(props) {
         return (
@@ -267,14 +317,14 @@ function ResumeformScreen(props) {
                                 <form>
                                     <div className="row mb-4">
                                         <div className="col-md-6">
-                                            <label htmlFor="firstname" className="pb-2">Full Name:</label>
+                                            <label htmlFor="firstname" className="pb-2">Full Name<span className='asteriskkey'>*</span></label>
                                             <div className="input-group">
                                                 <div className="input-group-prepend">
                                                     <div className="input-group-text h-100">
                                                         <FontAwesomeIcon  icon={faUser} />
                                                     </div>
                                                 </div>
-                                                <input type="text" className="form-control" placeholder="Enter your Full name"></input>
+                                                <input type="text" className="form-control" placeholder="Full name"></input>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -286,32 +336,32 @@ function ResumeformScreen(props) {
                                     </div>
                                     <div className="row mb-4">
                                         <div className="col-md-6">
-                                            <label htmlFor="firstname" className="pb-2">Email-ID:</label>
+                                            <label htmlFor="firstname" className="pb-2">Email-ID<span className='asteriskkey'>*</span></label>
                                             <div className="input-group">
                                                 <div className="input-group-prepend">
                                                     <div className="input-group-text h-100">
                                                         <FontAwesomeIcon  icon={faEnvelope} />
                                                     </div>
                                                 </div>
-                                                <input type="email" className="form-control" placeholder="Enter your Email address"></input>
+                                                <input type="email" className="form-control" placeholder="Email address"></input>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="lastname" className="pb-2">Phone No:</label>
+                                            <label htmlFor="lastname" className="pb-2">Phone No<span className='asteriskkey'>*</span></label>
                                             <div className="input-group">
                                                 <div className="input-group-prepend">
                                                     <div className="input-group-text h-100">
                                                         <FontAwesomeIcon rotation={90} icon={faPhone} />
                                                     </div>
                                                 </div>
-                                                <input type="text" className="form-control" placeholder="Enter your 10-digit phone number"></input>
+                                                <input type="text" className="form-control" placeholder="Enter 10-digit number"></input>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="row mb-4">
                                         <div className="col-md-12">
-                                            <label htmlFor="firstname" style={{paddingRight:10}} className="pb-2">Career Objective / Summary: </label>
+                                            <label htmlFor="firstname" style={{paddingRight:10}} className="pb-2">Career Objective / Summary<span className='asteriskkey'>*</span></label>
                                             
                                             <OverlayTrigger 
                                                 overlay={
@@ -339,7 +389,7 @@ function ResumeformScreen(props) {
                                     <div className="border d-md-block"></div>
 
                                     <div className="row mb-4 mt-4">
-                                    <p className='leftcardskilltext text-info'>Select your skills:</p>
+                                    <p className='leftcardskilltext text-info'>Select your skills <span className='asteriskkey'>*</span></p>
                                         <div className="col-md-12 mb-3">
                                             {/* <label htmlFor="lastname" className="pb-2">Phone No:</label> */}
                                             {/* <select className="form-control form-select"
@@ -355,7 +405,6 @@ function ResumeformScreen(props) {
                                                      </option>)
                                                  })} 
                                             </select> */}
-
                                             <Select
                                                 closeMenuOnSelect={true}
                                                 isMulti
@@ -368,7 +417,7 @@ function ResumeformScreen(props) {
                                                 isMulti
                                                 options={langOptions}
                                             />
-                                            <span>Selected option: {progSelectval}</span>
+                                            {/* <span>Selected option: {progSelectval}</span> */}
                                         </div>
                                     </div>
 
@@ -381,21 +430,57 @@ function ResumeformScreen(props) {
 
                                     <Accordion defaultActiveKey="0">
                                         <Accordion.Item eventKey="0">
-                                            <Accordion.Header>Project 1</Accordion.Header>
+                                            <Accordion.Header>Project 1 <span className='asteriskkey'>*</span></Accordion.Header>
                                                 <Accordion.Body>
                                                     <div className="row mb-4 mt-3">
-                                                        <div className="col-md-8">
+                                                        <div className="col-md-7">
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <div className="input-group-text h-100">
                                                                         <FontAwesomeIcon  icon={faLightbulb} />
                                                                     </div>
                                                                 </div>
-                                                                <input type="email" className="form-control" placeholder="Enter your project Name"></input>
+                                                                <input type="text" className="form-control" placeholder="Project Name"></input>
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
-                                                            
+                                                        
+                                                        <div className="col-md-5">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Role"></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row mb-2">
+                                                    <p className='leftcardtechnologytext'>Technologies used (Example: Java):</p>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 1"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 2"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 3"></input>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <div className="row mb-4">
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 4"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 5"></input>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -433,18 +518,54 @@ function ResumeformScreen(props) {
                                                 <Accordion.Header>Project 2 (Optional)</Accordion.Header>
                                                 <Accordion.Body>
                                                     <div className="row mb-4 mt-3">
-                                                        <div className="col-md-8">
+                                                        <div className="col-md-7">
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <div className="input-group-text h-100">
                                                                         <FontAwesomeIcon  icon={faLightbulb} />
                                                                     </div>
                                                                 </div>
-                                                                <input type="email" className="form-control" placeholder="Enter your project Name"></input>
+                                                                <input type="text" className="form-control" placeholder="Project Name"></input>
                                                             </div>
                                                         </div>
-                                                        <div className="col-md-4">
-                                                            
+                                                        
+                                                        <div className="col-md-5">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Role"></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row mb-2">
+                                                    <p className='leftcardtechnologytext'>Technologies used (Example: Java):</p>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 1"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 2"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 3"></input>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <div className="row mb-4">
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 4"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-4 pb-1">
+                                                            <div className="input-group">
+                                                                <input type="text" className="form-control" placeholder="Technology 5"></input>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -500,15 +621,57 @@ function ResumeformScreen(props) {
                                             </select>
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="lastname" className="pt-2 pb-2">Enter the Stream:</label>
+                                            <label htmlFor="lastname" className="pt-2 pb-2">Enter the Stream<span className='asteriskkey'>*</span></label>
+                                            <div className="input-group">
+                                                <input type="text" className="form-control" placeholder="Ex: Computer Science"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-4 mt-4">
+                                        <div className="col-md-12">
+                                            <label htmlFor="lastname" className="pt-2 pb-2">Enter University Name<span className='asteriskkey'>*</span></label>
                                             <div className="input-group">
                                                 <div className="input-group-prepend">
                                                     <div className="input-group-text h-100">
                                                         <FontAwesomeIcon icon={faGraduationCap} />
                                                     </div>
                                                 </div>
-                                                <input type="text" className="form-control" placeholder="Example: Computer Science"></input>
+                                                <input type="text" className="form-control" placeholder="Ex: Visveswaraya Technological University"></input>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-4 mt-4">
+                                        <div className="col-md-6">
+                                            <label htmlFor="degree" className="pt-2 pb-2">Month From: </label>  
+                                            <select className="form-control form-select"
+                                                    onChange={monthfromSelect}
+                                                    value={monthfrom}
+                                                    >
+                                                    {monthNames.map((item,keyindex) => {
+                                                        return(
+                                                        <option key={keyindex} 
+                                                                value={item.month}>
+                                                            {item.label}
+                                                        </option>)
+                                                    })} 
+                                            </select>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="degree" className="pt-2 pb-2">Month To: </label>  
+                                            <select className="form-control form-select"
+                                                    onChange={monthtoSelect}
+                                                    value={monthto}
+                                                    >
+                                                    {monthNames.map((item,keyindex) => {
+                                                        return(
+                                                        <option key={keyindex} 
+                                                                value={item.month}>
+                                                            {item.label}
+                                                        </option>)
+                                                    })} 
+                                            </select>
                                         </div>
                                     </div>
 
@@ -557,6 +720,66 @@ function ResumeformScreen(props) {
                                         </div>
                                     </div>
 
+                                    <div className="border d-md-block"></div>
+
+                                    <div className="row mb-4 mt-4">
+                                    <p className='leftcardskilltext text-info'>Certificate details:</p>
+                                        <div className="col-md-12">
+                                            <label htmlFor="lastname" className="pt-2 pb-2">Enter Course Name<span className='asteriskkey'>*</span></label>
+                                            <div className="input-group">
+                                                <div className="input-group-prepend">
+                                                    <div className="input-group-text h-100">
+                                                        <FontAwesomeIcon icon={faAward} />
+                                                    </div>
+                                                </div>
+                                                <input type="text" className="form-control" placeholder="Ex: AWS Cloud"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-4 mt-2">
+                                        <div className="col-md-12">
+                                            <label htmlFor="lastname" className="pt-2 pb-2"> Platform Name<span className='asteriskkey'>*</span></label>
+                                            <div className="input-group">
+                                                <input type="text" className="form-control" placeholder="Ex: Udemy"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-4 mt-4">
+                                        <div className="col-md-6">
+                                            <label htmlFor="degree" className="pt-2 pb-2">Issued Month: </label>  
+                                            <select className="form-control form-select"
+                                                    onChange={certificatemonthSelect}
+                                                    value={certificateMonth}
+                                                    >
+                                                    {monthNames.map((item,keyindex) => {
+                                                        return(
+                                                        <option key={keyindex} 
+                                                                value={item.month}>
+                                                            {item.label}
+                                                        </option>)
+                                                    })} 
+                                            </select>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label htmlFor="degree" className="pt-2 pb-2">Year: </label>  
+                                            <select className="form-control form-select"
+                                                    onChange={certificateyearSelect}
+                                                    value={certificateYear}
+                                                    >
+                                                    {yearData.map((item,keyindex) => {
+                                                        return(
+                                                        <option key={keyindex} 
+                                                                value={item.year}>
+                                                            {item.label}
+                                                        </option>)
+                                                    })} 
+                                            </select>
+                                        </div>
+                                    </div>
+
+
                                     <div className="text-center mt-4 pt-4 d-grid"> 
                                         <Button variant="dark" size="md" >
                                             SUBMIT 
@@ -592,7 +815,7 @@ function ResumeformScreen(props) {
                                 <Row>
                                     <Col md={8} className='pt-3'>
                                         <div>
-                                            <h4 className='nametext'>Sanath S Karanth</h4>
+                                            <h3 className='nametext'>Sanath S Karanth</h3>
                                             <h5 className='roletext'>Fresher</h5>
                                             <p>To work in a firm with a professional work driven environment where I can utilize and apply my knowledge, skills which would enable me as a fresh graduate to grow while fulfilling organizational goals.</p>
                                         </div>
@@ -619,17 +842,19 @@ function ResumeformScreen(props) {
                                 <Row>
                                     <Col md={8} className='pt-2'>
                                         <div>
-                                            <p className='workexperiencetext text-info pt-3'>Work Experience</p>
-                                            <h4 className='projecttext'>Project 1</h4>
-                                            <h5 className='developertext'>Technologies used: ReactJS,HTML,CSS</h5>
+                                            <p className='workexperiencetext text-info pt-3'>Projects</p>
+                                            <p className='projecttext'>Project 1</p>
+                                            <p className='projectroletext'>Front-end Developer</p>
+                                            <p className='developertext'>Technologies used: ReactJS,HTML,CSS</p>
                                             <ul>
                                                 <li>Created responsive web pages, mobile applications, and landing pages based on the requirements.</li>
                                                 <li>Developed standard and responsive web User Interfaces with a mobile-first approach using HTML, CSS, Bootstrap and Material-UI grid system, and API integrations using AXIOS package.</li>
                                             </ul>
                                         </div>
                                         <div className='pt-4'>
-                                            <h4 className='projecttext'>Project 2</h4>
-                                            <h5 className='developertext'>Technologies used: ReactJS,HTML,CSS</h5>
+                                            <p className='projecttext'>Project 2</p>
+                                            <p className='projectroletext'>Front-end Developer</p>
+                                            <p className='developertext'>Technologies used: ReactJS,HTML,CSS</p>
                                             <ul>
                                                 <li>Created responsive web pages, mobile applications, and landing pages based on the requirements.</li>
                                                 <li>Developed standard and responsive web User Interfaces with a mobile-first approach using HTML, CSS, Bootstrap and Material-UI grid system, and API integrations using AXIOS package.</li>
@@ -640,18 +865,25 @@ function ResumeformScreen(props) {
                                     <Col md={3} className='pt-2'>
                                         <div>
                                             <p className='skillstext text-info pt-3'>Skills</p>
-                                            <h5 className='skilllisttext'>ReactJS</h5>
-                                            <h5 className='skilllisttext'>HTML</h5>
-                                            <h5 className='skilllisttext'>CSS</h5>
-                                            <h5 className='skilllisttext'>Bootstrap</h5>
-                                            <h5 className='skilllisttext'>Material-UI</h5>
-                                            <h5 className='skilllisttext'>Python</h5>
+                                            <p className='skilllisttext'>ReactJS</p>
+                                            <p className='skilllisttext'>HTML</p>
+                                            <p className='skilllisttext'>CSS</p>
+                                            <p className='skilllisttext'>Bootstrap</p>
+                                            <p className='skilllisttext'>Material-UI</p>
+                                            <p className='skilllisttext'>Python</p>
                                         </div>
                                         <div>
                                             <p className='educationtext text-info pt-4'>Education</p>
-                                            <h5 className='degreetext'>BE (Computer Science)</h5>
-                                            <h5 className='universitytext'>Visvesvaraya Technological University</h5>
-                                            <h5 className='yeartext'>June 2015-2019</h5>
+                                            <p className='degreetext'>BE (Computer Science)</p>
+                                            <p className='universitytext'>Visvesvaraya Technological University</p>
+                                            <p className='yeartext'>June 2015-2019</p>
+                                        </div>
+
+                                        <div>
+                                            <p className='educationtext text-info pt-4'>Certificates</p>
+                                            <p className='degreetext'>AWS Cloud</p>
+                                            <p className='universitytext'>Udemy</p>
+                                            <p className='yeartext'>June 2015</p>
                                         </div>
                                     </Col>
                                 </Row>

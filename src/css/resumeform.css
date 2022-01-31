@@ -40,19 +40,26 @@
     font-weight: bolder;
   }
 
+  .leftcardtechnologytext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .asteriskkey {
+    color: red;
+    font-weight: bold;
+  }
 
 
   /* -------------------------  Right Card design  ------------------------ */
 
 
   .nametext {
-    font-size: 24px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
   }
 
   .roletext {
-    font-size: 18px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
   }
@@ -84,16 +91,25 @@
   .projecttext {
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 6px;
+  }
+
+  .projectroletext {
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 4px;
   }
 
   .developertext {
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
+    
   }
 
   .skilllisttext {
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 6px;
   }
 
   .educationtext {
@@ -107,11 +123,13 @@
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
+    margin-bottom: 6px;
   }
 
   .universitytext {
     font-size: 12px;
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 6px;
   }
 
   .yeartext {
