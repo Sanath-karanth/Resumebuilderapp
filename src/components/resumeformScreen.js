@@ -6,17 +6,20 @@ import {Navbar,Nav,Container,Row,Col,Button,Card,Modal,Tooltip,OverlayTrigger, A
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import YearPicker from "react-year-picker";
+import Pdf from "react-to-pdf";
 import '../css/resumeform.css'
+import { langOptions, educationOptions, monthNames, yearData } from "../json/json"
 
 const animatedComponents = makeAnimated();
 
 function ResumeformScreen(props) {
 
     const navigate = useNavigate();
+    const pdffileref = React.createRef();
     const {state} = useLocation();
     const { resumeid,resumename } = state;
-    // console.log("resume id is "+resumeid);
-    // console.log("resume id is "+resumename);
+    console.log("resume id is "+resumeid);
+    console.log("resume id is "+resumename);
 
     const [modalShow, setModalShow] = useState(false);
     const [suggestmodalShow, setSuggestmodalShow] = useState(false);
@@ -34,9 +37,6 @@ function ResumeformScreen(props) {
 
 
     const programSelect = (newValue, actionMeta) => {
-        // console.log("selected value is "+progSelectval);
-        // setProgSelectval(e.target.value);
-        // toggleLoading(true);
         if (newValue === null || newValue == '') {
             newValue = [0];
           }
@@ -101,81 +101,7 @@ function ResumeformScreen(props) {
     }
 
 
-    const langOptions = [
-        { value: 'HTML', label: 'HTML'},
-        { value: 'CSS', label: 'CSS'},
-        { value: 'Bootstrap', label: 'Bootstrap'},
-        { value: 'C', label: 'C'},
-        { value: 'C++', label: 'C++'},
-        { value: 'C#', label: 'C#'},
-        { value: 'JavaScript', label: 'JavaScript'},
-        { value: 'TypeScript', label: 'TypeScript'},
-        { value: 'SQL', label: 'SQL'},
-        { value: 'PHP', label: 'PHP'},
-        { value: 'Java', label: 'Java'},
-        { value: 'Python', label: 'Python'},
-        { value: 'ReactJS', label: 'ReactJS'},
-        { value: 'NodeJS', label: 'NodeJS'},
-        { value: 'React-Native', label: 'React-Native'},
-        { value: 'Angular', label: 'Angular'},
-        { value: 'Swift', label: 'Swift'},
-        { value: 'PowerShell', label: 'PowerShell'},
-        { value: 'Kotlin', label: 'Kotlin'},
-        { value: 'Ruby', label: 'Ruby'},
-        { value: 'UiPath', label: 'UiPath'},
-        { value: 'Blue Prism', label: 'Blue Prism'},
-        { value: 'Automation Anywhere', label: 'Automation Anywhere'},
-      ];
-
-      const educationOptions = [
-        { eduname: 'B.E', label: 'B.E'},
-        { eduname: 'M.Tech', label: 'M.Tech'},
-        { eduname: 'MBA', label: 'MBA'},
-        { eduname: 'BBA', label: 'BBA'},
-        { eduname: 'BCA', label: 'BCA'},
-        { eduname: 'MCA', label: 'MCA'},
-        { eduname: 'B.Sc', label: 'B.Sc'},
-        { eduname: 'M.Sc', label: 'M.Sc'},
-        { eduname: 'B.Com', label: 'B.Com'},
-        { eduname: 'M.Com', label: 'M.Com'},
-        { eduname: 'CA', label: 'CA'},
-        { eduname: 'MBBS', label: 'MBBS'},
-        { eduname: 'BA', label: 'BA'},
-        { eduname: 'B.Pharma', label: 'B.Pharma'},
-        { eduname: 'M.Pharma', label: 'M.Pharma'},
-        
-      ];
     
-      const monthNames = [
-        { month: 'January', label: 'January'},
-        { month: 'February', label: 'February'},
-        { month: 'March', label: 'March'},
-        { month: 'April', label: 'April'},
-        { month: 'May', label: 'May'},
-        { month: 'June', label: 'June'},
-        { month: 'July', label: 'July'},
-        { month: 'August', label: 'August'},
-        { month: 'September', label: 'September'},
-        { month: 'October', label: 'October'},
-        { month: 'November', label: 'November'},
-        { month: 'December', label: 'December'},
-      ];
-
-      const yearData = [
-        { year: '2010', label: '2010'},
-        { year: '2011', label: '2011'},
-        { year: '2012', label: '2012'},
-        { year: '2013', label: '2013'},
-        { year: '2014', label: '2014'},
-        { year: '2015', label: '2015'},
-        { year: '2016', label: '2016'},
-        { year: '2017', label: '2017'},
-        { year: '2018', label: '2018'},
-        { year: '2019', label: '2019'},
-        { year: '2020', label: '2020'},
-        { year: '2021', label: '2021'},
-        { year: '2022', label: '2022'},
-      ];
       
       function SuggesionModal(props) {
         return (
@@ -311,6 +237,8 @@ function ResumeformScreen(props) {
                                 </div>
 
                                 <div className='pt-2 pb-2'>
+                                    <p className='leftcardmandatorytext text-danger'>
+                                        <span className='asteriskkey'>*</span> Please fill all the details in this form to get the complete resume.</p>
                                     <p className='leftcardheadertext text-info'>Complete the Profile:</p>
                                 </div>
                                 {fresherForm ?
@@ -811,33 +739,36 @@ function ResumeformScreen(props) {
                     </Col>
                     <Col md={7}>
                         <Card className='p-4'>
+
+                        <div>
+                        <div style={{paddingLeft:20}}>
+                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} filename="code-example.pdf">
+                                {({ toPdf }) => <Button onClick={toPdf} variant="dark" size="md" >
+                                                Generate PDF 
+                                                </Button>}
+                            </Pdf>
+                        </div>
+                        <div ref={pdffileref}>
+                        {resumename === "Resume 1" ?
                             <Container className='p-4'>
                                 <Row>
-                                    <Col md={8} className='pt-3'>
+                                    <Col md={12} className='pt-3'>
                                         <div>
                                             <h3 className='nametext'>Sanath S Karanth</h3>
                                             <h5 className='roletext'>Fresher</h5>
-                                            <p>To work in a firm with a professional work driven environment where I can utilize and apply my knowledge, skills which would enable me as a fresh graduate to grow while fulfilling organizational goals.</p>
-                                        </div>
-                                    </Col>
-                                    {/* <Col sm={1}></Col> */}
-                                    <Col md={4} className='pt-3'>
-                                        <div className='ml-4' style={{paddingLeft:30}}>
+                                            
                                             <p className='mailtext'>
-                                                <span>
-                                                    <FontAwesomeIcon size="lg" icon={faEnvelope} />
-                                                </span>&nbsp; 
                                                 sanathsk97@gmail.com
                                             </p>
                                             <p className='phonetext'>
-                                                <span>
-                                                    <FontAwesomeIcon size="lg" rotation={90} icon={faPhone} />
-                                                </span>&nbsp; 
                                                 +91 94496 85219
                                             </p>
                                         </div>
-                                        
                                     </Col>
+                                </Row>
+                                <Row>
+                                    <p className='workexperiencetext text-info pt-3'>Professional Summary</p>
+                                    <p>To work in a firm with a professional work driven environment where I can utilize and apply my knowledge, skills which would enable me as a fresh graduate to grow while fulfilling organizational goals.</p>
                                 </Row>
                                 <Row>
                                     <Col md={8} className='pt-2'>
@@ -888,6 +819,80 @@ function ResumeformScreen(props) {
                                     </Col>
                                 </Row>
                             </Container>
+                            :
+                            <Container className='p-4'>
+                                <Row style={{backgroundColor:'#16365d'}}>
+                                    <Col md={12} className='p-3'>
+                                        <div>
+                                            <h3 className='nametext' style={{color:"#FFFFFF"}}>Sanath S Karanth</h3>
+                                            <h5 className='roletext' style={{color:"#FFFFFF"}}>Fresher</h5>
+                                            <p className='mailtext' style={{color:"#FFFFFF"}}>
+                                                sanathsk97@gmail.com
+                                            </p>
+                                            <p className='phonetext' style={{color:"#FFFFFF"}}>
+                                                +91 94496 85219
+                                            </p>
+                                        </div>
+                                        
+                                    </Col>
+                                   
+                                </Row>
+                                <Row style={{border: '1px solid #ddd'}}>
+                                    <Col md={8} className='pt-2' style={{backgroundColor:'#FCFCFC',paddingRight:20}}>
+                                        <div>
+                                            <p className='workexperiencetext text-danger pt-3'>Professional Summary</p>
+                                            <p>To work in a firm with a professional work driven environment where I can utilize and apply my knowledge, skills which would enable me as a fresh graduate to grow while fulfilling organizational goals.</p>
+                                        </div>
+                                        <div>
+                                            <p className='workexperiencetext text-danger pt-3'>Projects</p>
+                                            <p className='projecttext'>Project 1</p>
+                                            <p className='projectroletext'>Front-end Developer</p>
+                                            <p className='developertext'>Technologies used: ReactJS,HTML,CSS</p>
+                                            <ul>
+                                                <li>Created responsive web pages, mobile applications, and landing pages based on the requirements.</li>
+                                                <li>Developed standard and responsive web User Interfaces with a mobile-first approach using HTML, CSS, Bootstrap and Material-UI grid system, and API integrations using AXIOS package.</li>
+                                            </ul>
+                                        </div>
+                                        <div className='pt-4'>
+                                            <p className='projecttext'>Project 2</p>
+                                            <p className='projectroletext'>Front-end Developer</p>
+                                            <p className='developertext'>Technologies used: ReactJS,HTML,CSS</p>
+                                            <ul>
+                                                <li>Created responsive web pages, mobile applications, and landing pages based on the requirements.</li>
+                                                <li>Developed standard and responsive web User Interfaces with a mobile-first approach using HTML, CSS, Bootstrap and Material-UI grid system, and API integrations using AXIOS package.</li>
+                                            </ul>
+                                        </div>
+                                    </Col>
+                                    <Col md={4} className='pt-2' style={{backgroundColor:'#f1f1f1',paddingLeft:20}}>
+                                        <div>
+                                            <p className='skillstext text-danger pt-3'>Skills</p>
+                                            <p className='skilllisttext'>ReactJS</p>
+                                            <p className='skilllisttext'>HTML</p>
+                                            <p className='skilllisttext'>CSS</p>
+                                            <p className='skilllisttext'>Bootstrap</p>
+                                            <p className='skilllisttext'>Material-UI</p>
+                                            <p className='skilllisttext'>Python</p>
+                                        </div>
+                                        <div>
+                                            <p className='educationtext text-danger pt-4'>Education</p>
+                                            <p className='degreetext'>BE (Computer Science)</p>
+                                            <p className='universitytext'>Visvesvaraya Technological University</p>
+                                            <p className='yeartext'>June 2015-2019</p>
+                                        </div>
+
+                                        <div>
+                                            <p className='educationtext text-danger pt-4'>Certificates</p>
+                                            <p className='degreetext'>AWS Cloud</p>
+                                            <p className='universitytext'>Udemy</p>
+                                            <p className='yeartext'>June 2015</p>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Container>
+                            }
+                        </div>
+                        </div>
+                            
                         </Card>
                     </Col>
                 </Row>

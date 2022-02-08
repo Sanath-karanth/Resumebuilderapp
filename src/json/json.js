@@ -1,0 +1,77 @@
+
+
+export const langOptions = [
+    { value: 'HTML', label: 'HTML'},
+    { value: 'CSS', label: 'CSS'},
+    { value: 'Bootstrap', label: 'Bootstrap'},
+    { value: 'C', label: 'C'},
+    { value: 'C++', label: 'C++'},
+    { value: 'C#', label: 'C#'},
+    { value: 'JavaScript', label: 'JavaScript'},
+    { value: 'TypeScript', label: 'TypeScript'},
+    { value: 'SQL', label: 'SQL'},
+    { value: 'PHP', label: 'PHP'},
+    { value: 'Java', label: 'Java'},
+    { value: 'Python', label: 'Python'},
+    { value: 'ReactJS', label: 'ReactJS'},
+    { value: 'NodeJS', label: 'NodeJS'},
+    { value: 'React-Native', label: 'React-Native'},
+    { value: 'Angular', label: 'Angular'},
+    { value: 'Swift', label: 'Swift'},
+    { value: 'PowerShell', label: 'PowerShell'},
+    { value: 'Kotlin', label: 'Kotlin'},
+    { value: 'Ruby', label: 'Ruby'},
+    { value: 'UiPath', label: 'UiPath'},
+    { value: 'Blue Prism', label: 'Blue Prism'},
+    { value: 'Automation Anywhere', label: 'Automation Anywhere'},
+  ];
+
+  export const educationOptions = [
+    { eduname: 'B.E', label: 'B.E'},
+    { eduname: 'M.Tech', label: 'M.Tech'},
+    { eduname: 'MBA', label: 'MBA'},
+    { eduname: 'BBA', label: 'BBA'},
+    { eduname: 'BCA', label: 'BCA'},
+    { eduname: 'MCA', label: 'MCA'},
+    { eduname: 'B.Sc', label: 'B.Sc'},
+    { eduname: 'M.Sc', label: 'M.Sc'},
+    { eduname: 'B.Com', label: 'B.Com'},
+    { eduname: 'M.Com', label: 'M.Com'},
+    { eduname: 'CA', label: 'CA'},
+    { eduname: 'MBBS', label: 'MBBS'},
+    { eduname: 'BA', label: 'BA'},
+    { eduname: 'B.Pharma', label: 'B.Pharma'},
+    { eduname: 'M.Pharma', label: 'M.Pharma'},
+    
+  ];
+
+  export const monthNames = [
+    { month: 'January', label: 'January'},
+    { month: 'February', label: 'February'},
+    { month: 'March', label: 'March'},
+    { month: 'April', label: 'April'},
+    { month: 'May', label: 'May'},
+    { month: 'June', label: 'June'},
+    { month: 'July', label: 'July'},
+    { month: 'August', label: 'August'},
+    { month: 'September', label: 'September'},
+    { month: 'October', label: 'October'},
+    { month: 'November', label: 'November'},
+    { month: 'December', label: 'December'},
+  ];
+
+  export const yearData = [
+    { year: '2010', label: '2010'},
+    { year: '2011', label: '2011'},
+    { year: '2012', label: '2012'},
+    { year: '2013', label: '2013'},
+    { year: '2014', label: '2014'},
+    { year: '2015', label: '2015'},
+    { year: '2016', label: '2016'},
+    { year: '2017', label: '2017'},
+    { year: '2018', label: '2018'},
+    { year: '2019', label: '2019'},
+    { year: '2020', label: '2020'},
+    { year: '2021', label: '2021'},
+    { year: '2022', label: '2022'},
+  ];

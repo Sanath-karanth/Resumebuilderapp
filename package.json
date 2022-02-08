@@ -30,6 +30,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "react-select": "^5.2.2",
+    "react-to-pdf": "^0.0.14",
     "react-view-pdf": "^1.0.0",
     "react-year-picker": "^0.3.7",
     "web-vitals": "^2.1.3"
