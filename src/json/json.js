@@ -61,6 +61,8 @@ export const langOptions = [
   ];
 
   export const yearData = [
+    { year: '2008', label: '2008'},
+    { year: '2009', label: '2009'},
     { year: '2010', label: '2010'},
     { year: '2011', label: '2011'},
     { year: '2012', label: '2012'},
@@ -74,4 +76,41 @@ export const langOptions = [
     { year: '2020', label: '2020'},
     { year: '2021', label: '2021'},
     { year: '2022', label: '2022'},
+  ];
+
+  export const yearfromData = [
+    { year: '2008', label: '2008'},
+    { year: '2009', label: '2009'},
+    { year: '2010', label: '2010'},
+    { year: '2011', label: '2011'},
+    { year: '2012', label: '2012'},
+    { year: '2013', label: '2013'},
+    { year: '2014', label: '2014'},
+    { year: '2015', label: '2015'},
+    { year: '2016', label: '2016'},
+    { year: '2017', label: '2017'},
+    { year: '2018', label: '2018'},
+    { year: '2019', label: '2019'},
+    { year: '2020', label: '2020'},
+    { year: '2021', label: '2021'},
+    { year: '2022', label: '2022'},
+  ];
+
+  export const yeartoData = [
+    { year: '2008', label: '2008'},
+    { year: '2009', label: '2009'},
+    { year: '2010', label: '2010'},
+    { year: '2011', label: '2011'},
+    { year: '2012', label: '2012'},
+    { year: '2013', label: '2013'},
+    { year: '2014', label: '2014'},
+    { year: '2015', label: '2015'},
+    { year: '2016', label: '2016'},
+    { year: '2017', label: '2017'},
+    { year: '2018', label: '2018'},
+    { year: '2019', label: '2019'},
+    { year: '2020', label: '2020'},
+    { year: '2021', label: '2021'},
+    { year: '2022', label: '2022'},
+    { year: 'Present', label: 'Present'},
   ];
