@@ -7,6 +7,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import YearPicker from "react-year-picker";
 import Pdf from "react-to-pdf";
+import { Formik } from 'formik';
 import '../css/resumeform.css'
 import { langOptions, educationOptions, monthNames, yearData } from "../json/json"
 
@@ -36,9 +37,27 @@ function ResumeformScreen(props) {
     const [yeartoval, setToyearval] = useState('');
 
 
+    const [fullnamefresher, setFullnamefresher] = useState('');
+    const [emailfresher, setEmailfresher] = useState('');
+    const [phonefresher, setPhonefresher] = useState('');
+    const [summaryfresher, setSummaryfresher] = useState('');
+    const [skillnullfresher, setSkillnullfresher] = useState(false);
+
+    const options = {
+        orientation: 'portrait',
+        unit: 'in',
+        format: fresherForm ? [8,12] : [8,15]
+    };
+
+
     const programSelect = (newValue, actionMeta) => {
         if (newValue === null || newValue == '') {
             newValue = [0];
+            setSkillnullfresher(true);
+          }
+          else
+          {
+            setSkillnullfresher(false);
           }
           const array = [];
           newValue.map((obj) => {
@@ -100,7 +119,36 @@ function ResumeformScreen(props) {
         setExperienceForm(true);
     }
 
+    const freshervalidate = (values) => {
+        const errors = {};
+    
+        if (!values.fusername) {
+            errors.fusername = 'Username is required!';
+            }else if (!/^[A-Za-z\b ]+$/.test(values.fusername)) {
+            errors.fusername = 'Please enter a Valid username.';
+        }
 
+        if (!values.femail) {
+            errors.femail = 'Email ID is required!';
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.femail)) {
+            errors.femail = 'Please enter a Valid Email ID.';
+        }
+
+        if (!values.fphoneno) {
+            errors.fphoneno = 'Phone no is required!';
+            }else if (!/[6-9]\d{9}$/i.test(values.fphoneno)) {
+            errors.fphoneno = 'Please enter a Valid 10-digit phone number.';
+        }
+
+        if (!values.fsummary) {
+            errors.fsummary = 'Career Objective / Summary is required!';
+            }else if (!/^[A-Za-z0-9\b ]+$/.test(values.fsummary)) {
+            errors.fsummary = 'Please enter a Valid Alphanumerical Characters only.';
+        }
+       
+    
+        return errors;
+    };
     
       
       function SuggesionModal(props) {
@@ -242,7 +290,38 @@ function ResumeformScreen(props) {
                                     <p className='leftcardheadertext text-info'>Complete the Profile:</p>
                                 </div>
                                 {fresherForm ?
-                                <form>
+                                <Formik initialValues={{ fusername: fullnamefresher, 
+                                        femail: emailfresher , 
+                                        fphoneno: phonefresher , 
+                                        fsummary: summaryfresher ,
+                                        fskillselect: progSelectval,
+                                        fprojectonename: '' ,
+                                        fprojectonerole: '' ,
+                                        fprojectonetech1: '' ,
+                                        fprojectonetech2: '' ,
+                                        fprojectonetech3: '' ,
+                                        fprojectonepoint1: '' ,
+                                        fprojectonepoint2: '' ,
+                                        fprojectonepoint3: '' ,
+                                        fprojecttwoname: '' ,
+                                        fprojecttworole: '' ,
+                                        fprojecttwotech1: '' ,
+                                        fprojecttwotech2: '' ,
+                                        fprojecttwotech3: '' ,
+                                        fprojecttwopoint1: '' ,
+                                        fprojecttwopoint2: '' ,
+                                        fprojecttwopoint3: '' ,
+                                        fstream: '' ,
+                                        funiversity: '' ,
+                                        fyearfrom: '' ,
+                                        fyearto: '',
+                                        fcoursename: '',
+                                        fplatform: '' }} 
+                                // onSubmit={createPurchaseOrder} 
+                                validate={freshervalidate}
+                                >
+                                  {({ handleChange, handleBlur, handleSubmit, touched, values, errors }) => (
+                                    <>
                                     <div className="row mb-4">
                                         <div className="col-md-6">
                                             <label htmlFor="firstname" className="pb-2">Full Name<span className='asteriskkey'>*</span></label>
@@ -252,7 +331,22 @@ function ResumeformScreen(props) {
                                                         <FontAwesomeIcon  icon={faUser} />
                                                     </div>
                                                 </div>
-                                                <input type="text" className="form-control" placeholder="Full name"></input>
+                                                <input 
+                                                    type="text" 
+                                                    className="form-control" 
+                                                    placeholder="Full name"
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        setFullnamefresher(e.target.value)}
+                                                    }
+                                                    value={values.fusername}
+                                                    name="fusername">
+                                                </input>
+                                                { errors.fusername &&
+                                                    <div className='errortext pt-3'>
+                                                        {errors.fusername}
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -271,7 +365,22 @@ function ResumeformScreen(props) {
                                                         <FontAwesomeIcon  icon={faEnvelope} />
                                                     </div>
                                                 </div>
-                                                <input type="email" className="form-control" placeholder="Email address"></input>
+                                                <input 
+                                                    type="email" 
+                                                    className="form-control" 
+                                                    placeholder="Email address"
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        setEmailfresher(e.target.value)}
+                                                    }
+                                                    value={values.femail}
+                                                    name="femail">
+                                                </input>
+                                                { errors.femail &&
+                                                    <div className='errortext pt-3'>
+                                                        {errors.femail}
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -282,7 +391,23 @@ function ResumeformScreen(props) {
                                                         <FontAwesomeIcon rotation={90} icon={faPhone} />
                                                     </div>
                                                 </div>
-                                                <input type="text" className="form-control" placeholder="Enter 10-digit number"></input>
+                                                <input 
+                                                    type="text" 
+                                                    className="form-control" 
+                                                    placeholder="Enter 10-digit number"
+                                                    maxLength="10"
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        setPhonefresher(e.target.value)}
+                                                    }
+                                                    value={values.fphoneno}
+                                                    name="fphoneno">
+                                                </input>
+                                                { errors.fphoneno &&
+                                                    <div className='errortext pt-3'>
+                                                        {errors.fphoneno}
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +424,7 @@ function ResumeformScreen(props) {
                                                 <FontAwesomeIcon size='lg'
                                                                  className="infoIcon" 
                                                                  color="green" 
-                                                                 icon={faInfoCircle} />
+                                                                 icon={faInfoCircle} /> Click me
                                                 </span>
                                             </OverlayTrigger>
                                            
@@ -309,7 +434,21 @@ function ResumeformScreen(props) {
                                                         <FontAwesomeIcon icon={faSuitcase} />
                                                     </div>
                                                 </div>
-                                                <textarea className="form-control" rows="3"></textarea>
+                                                <textarea 
+                                                    className="form-control" 
+                                                    rows="3"
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        setSummaryfresher(e.target.value)}
+                                                    }
+                                                    value={values.fsummary}
+                                                    name="fsummary">
+                                                </textarea>
+                                                { errors.fsummary &&
+                                                    <div className='errortext pt-3'>
+                                                        {errors.fsummary}
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -344,7 +483,13 @@ function ResumeformScreen(props) {
                                                 onChange={programSelect}
                                                 isMulti
                                                 options={langOptions}
+                                                // value={values.fskillselect}
                                             />
+                                             { skillnullfresher === true &&
+                                                    <div className='errortext pt-3'>
+                                                        Please select Atleast 3-4 Skills.
+                                                    </div>
+                                             }
                                             {/* <span>Selected option: {progSelectval}</span> */}
                                         </div>
                                     </div>
@@ -713,8 +858,9 @@ function ResumeformScreen(props) {
                                             SUBMIT 
                                         </Button>
                                     </div>
-                                   
-                                </form>
+                                   </>
+                                   )}
+                                   </Formik>
                                 :
                                 <form>
                                     <div className="row mb-4">
@@ -742,33 +888,33 @@ function ResumeformScreen(props) {
 
                         <div>
                         <div style={{paddingLeft:20}}>
-                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} filename="code-example.pdf">
+                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} options={options} filename="code-example.pdf">
                                 {({ toPdf }) => <Button onClick={toPdf} variant="dark" size="md" >
                                                 Generate PDF 
                                                 </Button>}
                             </Pdf>
                         </div>
-                        <div ref={pdffileref}>
+                        <div ref={pdffileref} style={{height: '100%'}}>
                         {resumename === "Resume 1" ?
                             <Container className='p-4'>
                                 <Row>
                                     <Col md={12} className='pt-3'>
                                         <div>
-                                            <h3 className='nametext'>Sanath S Karanth</h3>
+                                            <h3 className='nametext'>{fullnamefresher}</h3>
                                             <h5 className='roletext'>Fresher</h5>
                                             
                                             <p className='mailtext'>
-                                                sanathsk97@gmail.com
+                                                {emailfresher}
                                             </p>
                                             <p className='phonetext'>
-                                                +91 94496 85219
+                                                +91 {phonefresher}
                                             </p>
                                         </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <p className='workexperiencetext text-info pt-3'>Professional Summary</p>
-                                    <p>To work in a firm with a professional work driven environment where I can utilize and apply my knowledge, skills which would enable me as a fresh graduate to grow while fulfilling organizational goals.</p>
+                                    <p>{summaryfresher}</p>
                                 </Row>
                                 <Row>
                                     <Col md={8} className='pt-2'>
@@ -796,12 +942,16 @@ function ResumeformScreen(props) {
                                     <Col md={3} className='pt-2'>
                                         <div>
                                             <p className='skillstext text-info pt-3'>Skills</p>
-                                            <p className='skilllisttext'>ReactJS</p>
-                                            <p className='skilllisttext'>HTML</p>
-                                            <p className='skilllisttext'>CSS</p>
-                                            <p className='skilllisttext'>Bootstrap</p>
-                                            <p className='skilllisttext'>Material-UI</p>
-                                            <p className='skilllisttext'>Python</p>
+                                            { progSelectval == '' ? 
+                                                null 
+                                            :
+                                              progSelectval.map((item,key) => {
+                                                  return(
+                                                  <p key={key} className='skilllisttext'>
+                                                    {item}
+                                                  </p>)
+                                              })
+                                            }
                                         </div>
                                         <div>
                                             <p className='educationtext text-info pt-4'>Education</p>
