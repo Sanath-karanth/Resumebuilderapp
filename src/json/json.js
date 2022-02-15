@@ -114,3 +114,32 @@ export const langOptions = [
     { year: '2022', label: '2022'},
     { year: 'Present', label: 'Present'},
   ];
+
+
+
+  export const roleOptions = [
+    { value: 'Associate Software Engineer', label: 'Associate Software Engineer'},
+    { value: 'Software Engineer', label: 'Software Engineer'},
+    { value: 'Junior Software Engineer', label: 'Junior Software Engineer'},
+    { value: 'Senior Software Engineer', label: 'Senior Software Engineer'},
+    { value: 'Associate Software Engineer', label: 'Associate Software Engineer'},
+    { value: 'System Engineer', label: 'System Engineer'},
+    { value: 'IT Analyst', label: 'IT Analyst'},
+    { value: 'Assistant Consultant', label: 'Assistant Consultant'},
+    { value: 'Associate Consultant', label: 'Associate Consultant'},
+    { value: 'Senior Consultant', label: 'Senior Consultant'},
+    { value: 'Systems Engineer', label: 'Systems Engineer'},
+    { value: 'Senior Systems Engineer', label: 'Senior Systems Engineer'},
+    { value: 'Technology Analyst', label: 'Technology Analyst'},
+    { value: 'Project Manager', label: 'Project Manager'},
+    { value: 'Senior Project Manager', label: 'Senior Project Manager'},
+    { value: 'Delivery Manager', label: 'Delivery Manager'},
+    { value: 'Quality Assurance Engineer', label: 'Quality Assurance Engineer'},
+    { value: 'Test Engineer', label: 'Test Engineer'},
+    { value: 'Software Test Engineer', label: 'Software Test Engineer'},
+    { value: 'Senior Test Engineer', label: 'Senior Test Engineer'},
+    { value: 'Data Engineer', label: 'Data Engineer'},
+    { value: 'Senior Data Engineer', label: 'Senior Data Engineer'},
+    { value: 'Network Engineer', label: 'Network Engineer'},
+    { value: 'Project Engineer', label: 'Project Engineer'},
+  ];

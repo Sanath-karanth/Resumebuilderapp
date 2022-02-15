@@ -151,6 +151,24 @@
     font-size: 10px;
     font-family: 'Montserrat', sans-serif;
   }
+
+  .worknametext {
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 6px;
+  }
+
+  .workroletext {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 4px;
+  }
+
+  .workmonthyeartext {
+    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 6px;
+  }
   
   .errortext {
     font-size: 14px;
