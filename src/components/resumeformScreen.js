@@ -3,15 +3,17 @@ import { Link,useNavigate,useLocation  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faAngleLeft, faUser, faEnvelope, 
          faPhone, faSuitcase,faInfoCircle,faLightbulb, 
-         faGraduationCap, faAward, faCalendar, faBriefcase } from '@fortawesome/free-solid-svg-icons'
+         faGraduationCap, faAward, faCalendar, faBriefcase, faCommentDots, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import {Navbar,Nav,Container,Row,Col,Button,Card,Modal,Tooltip,OverlayTrigger, Accordion} from 'react-bootstrap'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import moment from 'moment';
 import YearPicker from "react-year-picker";
 import Pdf from "react-to-pdf";
 import { Formik } from 'formik';
 import '../css/resumeform.css'
-import { langOptions, educationOptions, monthNames, yearData, yearfromData, yeartoData, roleOptions } from "../json/json"
+import { langOptions, educationOptions, monthNames, yearData, 
+        yearfromData, yeartoData, roleOptions, summarysuggestOptions } from "../json/json"
 
 const animatedComponents = makeAnimated();
 
@@ -20,6 +22,7 @@ function ResumeformScreen(props) {
     const navigate = useNavigate();
     const pdffileref = React.createRef();
     const {state} = useLocation();
+    let currentyear = moment().format('YYYY');
     const { resumeid,resumename } = state;
     console.log("resume id is "+resumeid);
     console.log("resume id is "+resumename);
@@ -27,6 +30,7 @@ function ResumeformScreen(props) {
     const [modalShow, setModalShow] = useState(false);
     const [genbuttonvisible, setGenbuttonvisible] = useState(false)
     const [suggestmodalShow, setSuggestmodalShow] = useState(false);
+    const [instructionmodalShow, setInstructionmodalShow] = useState(false);
     const [fresherForm, setFresherForm] = useState(true);
     const [experienceForm, setExperienceForm] = useState(false);
     const [isselectLoading, setIsselectLoading] = useState(true);
@@ -86,7 +90,8 @@ function ResumeformScreen(props) {
     const [disablemontheyear2, setDisablemontheyear2] = useState(false);
     const [disablemontheyear3, setDisablemontheyear3] = useState(false);
 
-    const [companynamywork1, setCompanynamywork1] = useState('');
+    const [companynamework1, setCompanynamework1] = useState('');
+    const [companylocation1, setCompanylocation1] = useState('');
     const [rolework1, setRolework1] = useState('');
     const [workonemonthfromval, setWorkonemonthfromval] = useState('January');
     const [workonemonthtoval, setWorkonemonthtoval] = useState('May');
@@ -95,7 +100,8 @@ function ResumeformScreen(props) {
     const [workonepoint1exp, setWorkonepoint1exp] = useState('');
     const [workonepoint2exp, setWorkonepoint2exp] = useState('');
 
-    const [companynamywork2, setCompanynamywork2] = useState('');
+    const [companynamework2, setCompanynamework2] = useState('');
+    const [companylocation2, setCompanylocation2] = useState('');
     const [rolework2, setRolework2] = useState('');
     const [worktwomonthfromval, setWorktwomonthfromval] = useState('January');
     const [worktwomonthtoval, setWorktwomonthtoval] = useState('May');
@@ -104,7 +110,8 @@ function ResumeformScreen(props) {
     const [worktwopoint1exp, setWorktwopoint1exp] = useState('');
     const [worktwopoint2exp, setWorktwopoint2exp] = useState('');
 
-    const [companynamywork3, setCompanynamywork3] = useState('');
+    const [companynamework3, setCompanynamework3] = useState('');
+    const [companylocation3, setCompanylocation3] = useState('');
     const [rolework3, setRolework3] = useState('');
     const [workthreemonthfromval, setWorkthreemonthfromval] = useState('January');
     const [workthreemonthtoval, setWorkthreemonthtoval] = useState('May');
@@ -228,6 +235,9 @@ function ResumeformScreen(props) {
         setSuggestmodalShow(true)
     }
 
+    const InstructionClick = () => {
+        setInstructionmodalShow(true)
+    }
     
     const backClick = (event) => {
         event.preventDefault();
@@ -366,6 +376,12 @@ function ResumeformScreen(props) {
             errors.ecompanyname = 'Please enter a valid Alpha Characters only.';
         }
 
+        if (!values.ecompanylocation) {
+            errors.ecompanylocation = 'Company location is required!';
+            }else if (!/^[A-Za-z\b ]+$/.test(values.ecompanylocation)) {
+            errors.ecompanylocation = 'Please enter a valid Alpha Characters only.';
+        }
+
         if (!values.erole) {
             errors.erole = 'Role is required!';
             }else if (!/^[A-Za-z\b ]+$/.test(values.erole)) {
@@ -378,7 +394,6 @@ function ResumeformScreen(props) {
       
       function SuggesionModal(props) {
         return (
-        // <Container>
           <Modal scrollable
             {...props}
             size="lg"
@@ -392,48 +407,57 @@ function ResumeformScreen(props) {
             </Modal.Header>
             <Modal.Body>
             <h5>Copy your choice</h5>
-            <Card className='m-3'  border="secondary">
-                <Card.Header>Front-end Developer</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                    With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-
-            <Card className='m-3'  border="secondary">
-                <Card.Header>Back-end Developer</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                    With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            
-            <Card className='m-3'  border="secondary">
-                <Card.Header>Front-end Developer</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                    With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-
-            <Card className='m-3'  border="secondary">
-                <Card.Header>Front-end Developer</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                    With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-
+                {summarysuggestOptions.map((item,key) => {
+                    return (
+                        <Card key={key} className='m-3'  border="secondary">
+                            <Card.Header >{item.role}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    {item.summary}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>)
+                })}
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
           </Modal>
-        //   </Container>
+        );
+      }
+
+      function InstructionsModal(props) {
+        return (
+          <Modal scrollable
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Instructions
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Card className='m-3'  border="secondary">
+                    <Card.Header style={{color:'red'}}><span className='asteriskkey'>*</span> Important Instructions</Card.Header>
+                    <Card.Body>
+                        <Card.Text style={{color:'green'}}>
+                            <ol>
+                                <li>Please fill all the details in this form to get the complete resume.</li>
+                                <li>After filling all the detials in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
+                                <li><b><u>Note:</u></b> Resume will be restricted to only one page of PDF. So, Fill the details with short descriptions.</li>
+                                <li>Kindly Request you to please fill the feedback form at the end.</li>
+                            </ol>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={props.onHide}>Close</Button>
+            </Modal.Footer>
+          </Modal>
         );
       }
 
@@ -478,7 +502,21 @@ function ResumeformScreen(props) {
                     <Nav.Link className='navheadersubtext' onClick={() => setModalShow(true)}>
                         <FontAwesomeIcon size='lg' icon={faAngleLeft} />&nbsp;&nbsp;Back to Home
                     </Nav.Link>
+                    <Nav.Link className='navheadersubtext text-success' 
+                            onClick={InstructionClick}>
+                            <FontAwesomeIcon icon={faQuestionCircle} /> Instructions
+                    </Nav.Link>
                 </Nav>
+                </Navbar.Collapse>
+
+                <Navbar.Collapse className="justify-content-end">
+                        <Nav>
+                            <Nav.Link 
+                                className='navheadersubtext text-primary' 
+                                href="#home"><FontAwesomeIcon icon={faCommentDots} /> 
+                                {' '}Feedback
+                            </Nav.Link>
+                        </Nav>
                 </Navbar.Collapse>
             </Navbar>
             </Container>
@@ -490,6 +528,10 @@ function ResumeformScreen(props) {
             <SuggesionModal
                 show={suggestmodalShow}
                 onHide={() => setSuggestmodalShow(false)}
+            />
+            <InstructionsModal
+                show={instructionmodalShow}
+                onHide={() => setInstructionmodalShow(false)}
             />
                 <Row>
                     <Col md={5}>
@@ -1402,7 +1444,8 @@ function ResumeformScreen(props) {
                                     fyearto: yeartoval,
                                     fcoursename: coursenamefresher,
                                     fplatform: platnamefresher,
-                                    ecompanyname: companynamywork1,
+                                    ecompanyname: companynamework1,
+                                    ecompanylocation: companylocation1,
                                     erole: rolework1,
                                     eworkyearfrom1: workoneyearfromval ,
                                     eworkyearto1: workoneyeartoval,
@@ -1588,7 +1631,7 @@ function ResumeformScreen(props) {
 
                                 <div className="row mt-4 mb-3">
                                     <p className='leftcardskilltext text-info'>Work Experience 1 <span className='asteriskkey'>*</span></p>
-                                        <div className="col-md-12">
+                                        <div className="col-md-7">
                                             <label htmlFor="lastname" className="pb-2">Company Name<span className='asteriskkey'>*</span></label>
                                             <div className="input-group">
                                             <div className="input-group-prepend">
@@ -1602,7 +1645,7 @@ function ResumeformScreen(props) {
                                                 placeholder="Enter Full name"
                                                 onChange={(e) => {
                                                     handleChange(e);
-                                                    setCompanynamywork1(e.target.value)}
+                                                    setCompanynamework1(e.target.value)}
                                                 }
                                                 value={values.ecompanyname}
                                                 name="ecompanyname">
@@ -1614,6 +1657,29 @@ function ResumeformScreen(props) {
                                                 </div>
                                         }
                                         </div>
+
+                                        <div className="col-md-5">
+                                            <label htmlFor="lastname" className="pb-2">Location<span className='asteriskkey'>*</span></label>
+                                            <div className="input-group">
+                                            
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                placeholder="Company location"
+                                                onChange={(e) => {
+                                                    handleChange(e);
+                                                    setCompanylocation1(e.target.value)}
+                                                }
+                                                value={values.ecompanylocation}
+                                                name="ecompanylocation">
+                                            </input>
+                                        </div>
+                                        { errors.ecompanylocation &&
+                                                <div className='errortext pt-2'>
+                                                    {errors.ecompanylocation}
+                                                </div>
+                                        }
+                                    </div>
                                 </div>
 
 
@@ -1804,7 +1870,7 @@ function ResumeformScreen(props) {
                                 { isworkChecked2  ? 
                                 <>
                                 <div className="row mt-3 mb-3">
-                                    <div className="col-md-12">
+                                    <div className="col-md-7">
                                         <label htmlFor="lastname" className="pb-2">Company Name<span className='asteriskkey'>*</span></label>
                                         <div className="input-group">
                                         <div className="input-group-prepend">
@@ -1818,12 +1884,30 @@ function ResumeformScreen(props) {
                                             placeholder="Enter Full name"
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                setCompanynamywork2(e.target.value)}
+                                                setCompanynamework2(e.target.value)}
                                             }
-                                            value={companynamywork2}
-                                            name="companynamywork2">
+                                            value={companynamework2}
+                                            name="companynamework2">
                                         </input>
                                     </div>
+                                    </div>
+
+                                    <div className="col-md-5">
+                                            <label htmlFor="lastname" className="pb-2">Location<span className='asteriskkey'>*</span></label>
+                                            <div className="input-group">
+                                            
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                placeholder="Company location"
+                                                onChange={(e) => {
+                                                    handleChange(e);
+                                                    setCompanylocation2(e.target.value)}
+                                                }
+                                                value={companylocation2}
+                                                name="companylocation2">
+                                            </input>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2014,7 +2098,7 @@ function ResumeformScreen(props) {
                                 { isworkChecked3  ? 
                                 <>
                                 <div className="row mt-3 mb-3">
-                                    <div className="col-md-12">
+                                    <div className="col-md-7">
                                         <label htmlFor="lastname" className="pb-2">Company Name<span className='asteriskkey'>*</span></label>
                                         <div className="input-group">
                                         <div className="input-group-prepend">
@@ -2028,12 +2112,30 @@ function ResumeformScreen(props) {
                                             placeholder="Enter Full name"
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                setCompanynamywork3(e.target.value)}
+                                                setCompanynamework3(e.target.value)}
                                             }
-                                            value={companynamywork3}
-                                            name="companynamywork3">
+                                            value={companynamework3}
+                                            name="companynamework3">
                                         </input>
                                     </div>
+                                    </div>
+
+                                    <div className="col-md-5">
+                                            <label htmlFor="lastname" className="pb-2">Location<span className='asteriskkey'>*</span></label>
+                                            <div className="input-group">
+                                            
+                                            <input 
+                                                type="text" 
+                                                className="form-control" 
+                                                placeholder="Company location"
+                                                onChange={(e) => {
+                                                    handleChange(e);
+                                                    setCompanylocation3(e.target.value)}
+                                                }
+                                                value={companylocation3}
+                                                name="companylocation3">
+                                            </input>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -2937,7 +3039,7 @@ function ResumeformScreen(props) {
                                     <Col md={3} className='pt-2'>
                                         <div>
                                             <p className='skillstext text-info pt-3'>Skills</p>
-                                            { progSelectval == '' ? 
+                                            { progSelectval === '' ? 
                                                 null 
                                             :
                                               progSelectval.map((item,key) => {
@@ -3021,7 +3123,7 @@ function ResumeformScreen(props) {
                                     <Col md={4} className='pt-2' style={{backgroundColor:'#f1f1f1',paddingLeft:20}}>
                                         <div>
                                             <p className='skillstext text-danger pt-3'>Skills</p>
-                                            { progSelectval == '' ? 
+                                            { progSelectval === '' ? 
                                                 null 
                                             :
                                               progSelectval.map((item,key) => {
@@ -3090,40 +3192,40 @@ function ResumeformScreen(props) {
                                     <Col md={8} className='pt-2'>
                                         <div>
                                             <p className='workexperiencetext text-info pt-3'>Work Experience</p>
-                                            <h3 className='worknametext'>{companynamywork1}</h3>
+                                            <h3 className='worknametext'>{companynamework1}{companylocation1 === '' ? null : ` - ${companylocation1}`}</h3>
                                             <h5 className='workroletext'>{rolework1}</h5>
                                             <p className='workmonthyeartext'>
                                                 {workonemonthfromval} {workoneyearfromval} - { ispresentChecked1 ? 'Present' :  `${workonemonthtoval} ${workoneyeartoval}` }
                                             </p>
                                             <ul>
-                                                <li>{workonepoint1exp}</li>
-                                                <li>{workonepoint2exp}</li>
+                                                { workonepoint1exp === '' ? null : <li>{workonepoint1exp}</li>}
+                                                { workonepoint2exp === '' ? null : <li>{workonepoint2exp}</li>}
                                             </ul>
                                         </div>
                                         {isworkChecked2 ? 
                                             <div>
-                                                <h3 className='worknametext'>{companynamywork2}</h3>
+                                                <h3 className='worknametext'>{companynamework2}{companylocation2 === '' ? null : ` - ${companylocation2}`}</h3>
                                                 <h5 className='workroletext'>{rolework2}</h5>
                                                 <p className='workmonthyeartext'>
                                                     {worktwomonthfromval} {worktwoyearfromval} - { ispresentChecked2 ? 'Present' :  `${worktwomonthtoval} ${worktwoyeartoval}` }
                                                 </p>
                                                 <ul>
-                                                    <li>{worktwopoint1exp}</li>
-                                                    <li>{worktwopoint2exp}</li>
+                                                    { worktwopoint1exp === '' ? null : <li>{worktwopoint1exp}</li>}
+                                                    { worktwopoint2exp === '' ? null : <li>{worktwopoint2exp}</li>}
                                                 </ul>
                                             </div>
                                         :null
                                         }
                                         {isworkChecked3 ? 
                                             <div>
-                                                <h3 className='worknametext'>{companynamywork3}</h3>
+                                                <h3 className='worknametext'>{companynamework3}{companylocation3 === '' ? null : ` - ${companylocation3}`}</h3>
                                                 <h5 className='workroletext'>{rolework3}</h5>
                                                 <p className='workmonthyeartext'>
                                                     {workthreemonthfromval} {workthreeyearfromval} - { ispresentChecked3 ? 'Present' :  `${workthreemonthtoval} ${workthreeyeartoval}` }
                                                 </p>
                                                 <ul>
-                                                    <li>{workthreepoint1exp}</li>
-                                                    <li>{workthreepoint2exp}</li>
+                                                    { workthreepoint1exp === '' ? null : <li>{workthreepoint1exp}</li>}
+                                                    { workthreepoint2exp === '' ? null : <li>{workthreepoint2exp}</li>}
                                                 </ul>
                                             </div>
                                         :null
@@ -3162,7 +3264,7 @@ function ResumeformScreen(props) {
                                     <Col md={3} className='pt-2'>
                                         <div>
                                             <p className='skillstext text-info pt-3'>Skills</p>
-                                            { progSelectval == '' ? 
+                                            { progSelectval === '' ? 
                                                 null 
                                             :
                                               progSelectval.map((item,key) => {
@@ -3215,40 +3317,40 @@ function ResumeformScreen(props) {
                                         </div>
                                         <div>
                                             <p className='workexperiencetext text-danger pt-3'>Work Experience</p>
-                                            <h3 className='worknametext'>{companynamywork1}</h3>
+                                            <h3 className='worknametext'>{companynamework1}{companylocation1 === '' ? null : ` - ${companylocation1}`}</h3>
                                             <h5 className='workroletext'>{rolework1}</h5>
                                             <p className='workmonthyeartext'>
                                                 {workonemonthfromval} {workoneyearfromval} - { ispresentChecked1 ? 'Present' :  `${workonemonthtoval} ${workoneyeartoval}` }
                                             </p>
                                             <ul>
-                                                <li>{workonepoint1exp}</li>
-                                                <li>{workonepoint2exp}</li>
+                                                { workonepoint1exp === '' ? null : <li>{workonepoint1exp}</li>}
+                                                { workonepoint2exp === '' ? null : <li>{workonepoint2exp}</li>}
                                             </ul>
                                         </div>
                                         {isworkChecked2 ? 
                                             <div>
-                                                <h3 className='worknametext'>{companynamywork2}</h3>
+                                                <h3 className='worknametext'>{companynamework2}{companylocation2 === '' ? null : ` - ${companylocation2}`}</h3>
                                                 <h5 className='workroletext'>{rolework2}</h5>
                                                 <p className='workmonthyeartext'>
                                                     {worktwomonthfromval} {worktwoyearfromval} - { ispresentChecked2 ? 'Present' :  `${worktwomonthtoval} ${worktwoyeartoval}` }
                                                 </p>
                                                 <ul>
-                                                    <li>{worktwopoint1exp}</li>
-                                                    <li>{worktwopoint2exp}</li>
+                                                    { worktwopoint1exp === '' ? null : <li>{worktwopoint1exp}</li>}
+                                                    { worktwopoint2exp === '' ? null : <li>{worktwopoint2exp}</li>}
                                                 </ul>
                                             </div>
                                         :null
                                         }
                                         {isworkChecked3 ? 
                                             <div>
-                                                <h3 className='worknametext'>{companynamywork3}</h3>
+                                                <h3 className='worknametext'>{companynamework3}{companylocation3 === '' ? null : ` - ${companylocation3}`}</h3>
                                                 <h5 className='workroletext'>{rolework3}</h5>
                                                 <p className='workmonthyeartext'>
                                                     {workthreemonthfromval} {workthreeyearfromval} - { ispresentChecked3 ? 'Present' :  `${workthreemonthtoval} ${workthreeyeartoval}` }
                                                 </p>
                                                 <ul>
-                                                    <li>{workthreepoint1exp}</li>
-                                                    <li>{workthreepoint2exp}</li>
+                                                    { workthreepoint1exp === '' ? null : <li>{workthreepoint1exp}</li>}
+                                                    { workthreepoint2exp === '' ? null : <li>{workthreepoint2exp}</li>}
                                                 </ul>
                                             </div>
                                         :null
@@ -3286,7 +3388,7 @@ function ResumeformScreen(props) {
                                     <Col md={4} className='pt-2' style={{backgroundColor:'#f1f1f1',paddingLeft:20}}>
                                         <div>
                                             <p className='skillstext text-danger pt-3'>Skills</p>
-                                            { progSelectval == '' ? 
+                                            { progSelectval === '' ? 
                                                 null 
                                             :
                                               progSelectval.map((item,key) => {
@@ -3321,7 +3423,10 @@ function ResumeformScreen(props) {
                     </Col>
                 </Row>
             </Container>
-            
+            <div className="mt-4 pt-2"></div>
+            <div className="footer">
+                <p className='footertext'>Copyright &#169; {currentyear}. All Rights Reserved</p>
+            </div>
         </div>
     );
 }

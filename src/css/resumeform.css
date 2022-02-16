@@ -153,22 +153,41 @@
   }
 
   .worknametext {
-    font-size: 18px;
+    font-size: 15px;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 6px;
   }
 
   .workroletext {
-    font-size: 14px;
+    font-size: 13px;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 4px;
   }
 
   .workmonthyeartext {
-    font-size: 10px;
+    font-size: 11px;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 6px;
   }
+
+  .footer{
+  flex-shrink: 0;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(6, 0, 88);
+  color: white;
+  position: fixed;
+  padding-bottom: 20;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6%;
+}
+
+.footertext {
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
   
   .errortext {
     font-size: 14px;

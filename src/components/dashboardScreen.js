@@ -1,9 +1,10 @@
 import React, { Fragment,useState } from 'react';
 import { Link,useNavigate  } from "react-router-dom";
-import {Navbar,Nav,Container,Row,Col,Button,Card} from 'react-bootstrap'
+import {Navbar,Nav,Container,Row,Col,Button,Card,Modal} from 'react-bootstrap'
+import moment from 'moment';
 import logo from '../logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faBookmark } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faQuestionCircle, faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import '../css/dashboard.css'
 
 
@@ -12,6 +13,8 @@ const DashboardScreen = (props) => {
     const [RadioVal, setRadioVal] = useState('Resume 1');
     const [idVal, setIdVal] = useState(97);
     const navigate = useNavigate();
+    let currentyear = moment().format('YYYY');
+    const [instructionmodalShow, setInstructionmodalShow] = useState(false);
 
     const handleRadioChange = (e) => {
         console.log("radio value is "+ e.target.id)
@@ -28,6 +31,10 @@ const DashboardScreen = (props) => {
         {
             return false
         }
+    }
+
+    const InstructionClick = () => {
+        setInstructionmodalShow(true)
     }
 
     const proceedClick = () => {
@@ -49,6 +56,41 @@ const DashboardScreen = (props) => {
         }
     ]
 
+    function InstructionsModal(props) {
+        return (
+          <Modal scrollable
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Instructions
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Card className='m-3'  border="secondary">
+                    <Card.Header style={{color:'red'}}><span className='asteriskkey'>*</span> Important Instructions</Card.Header>
+                    <Card.Body>
+                        <Card.Text style={{color:'green'}}>
+                            <ol>
+                                <li>Please fill all the details in this form to get the complete resume.</li>
+                                <li>After filling all the detials in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
+                                <li><b><u>Note:</u></b> Resume will be restricted to only one page of PDF. So, Fill the details with short descriptions.</li>
+                                <li>Kindly Request you to please fill the feedback form at the end.</li>
+                            </ol>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={props.onHide}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        );
+      }
+
     return (
         <div className="AppContainer">
            <Container fluid
@@ -59,15 +101,32 @@ const DashboardScreen = (props) => {
                 <Navbar.Brand className='navheadertext' style={{color:'#00008b'}} href="#home">Resume Builder</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link className='navheadersubtext' href="#home"><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
-                    <Nav.Link className='navheadersubtext' href="#home"><FontAwesomeIcon icon={faBookmark} /> Saved</Nav.Link>
-                </Nav>
+                    <Nav className="me-auto">
+                        <Nav.Link className='navheadersubtext' href="#home"><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
+                        <Nav.Link className='navheadersubtext text-success' 
+                            onClick={InstructionClick}>
+                            <FontAwesomeIcon icon={faQuestionCircle} /> Instructions
+                    </Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+
+                <Navbar.Collapse className="justify-content-end">
+                        <Nav>
+                            <Nav.Link 
+                                className='navheadersubtext text-primary' 
+                                href="#home"><FontAwesomeIcon icon={faCommentDots} /> 
+                                {' '}Feedback
+                            </Nav.Link>
+                        </Nav>
                 </Navbar.Collapse>
             </Navbar>
             </Container>
 
             <Container fluid className="pt-4 pb-4">
+            <InstructionsModal
+                show={instructionmodalShow}
+                onHide={() => setInstructionmodalShow(false)}
+            />
                 <Row>
                     <Col sm={4}>
                         <Card>
@@ -148,6 +207,10 @@ const DashboardScreen = (props) => {
                 </Row>
                 
             </Container>
+            <div className="mt-4 pt-2"></div>
+            <div className="footer">
+                <p className='footertext'>Copyright &#169; {currentyear}. All Rights Reserved</p>
+            </div>
         </div>
     );
 }
