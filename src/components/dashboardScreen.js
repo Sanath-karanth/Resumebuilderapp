@@ -1,4 +1,4 @@
-import React, { Fragment,useState } from 'react';
+import React, { Fragment,useState, useEffect } from 'react';
 import { Link,useNavigate  } from "react-router-dom";
 import {Navbar,Nav,Container,Row,Col,Button,Card,Modal} from 'react-bootstrap'
 import moment from 'moment';
@@ -6,6 +6,7 @@ import logo from '../logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faQuestionCircle, faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import '../css/dashboard.css'
+import Loader from '../common/loader'
 
 
 const DashboardScreen = (props) => {
@@ -15,6 +16,7 @@ const DashboardScreen = (props) => {
     const navigate = useNavigate();
     let currentyear = moment().format('YYYY');
     const [instructionmodalShow, setInstructionmodalShow] = useState(false);
+    const [spin, setSpin] = useState(true);
 
     const handleRadioChange = (e) => {
         console.log("radio value is "+ e.target.id)
@@ -36,6 +38,15 @@ const DashboardScreen = (props) => {
     const InstructionClick = () => {
         setInstructionmodalShow(true)
     }
+
+    // const proceedClick = () => {
+    //     setSpin(true);
+    //       const timer = setTimeout(() => {
+    //         setSpin(false);
+    //         navigate("/resumeform", { replace: true , state: {resumeid: idVal, resumename: RadioVal }});
+    //       }, 2000);
+    //       return () => clearTimeout(timer);
+    // }
 
     const proceedClick = () => {
         navigate("/resumeform", { replace: true , state: {resumeid: idVal, resumename: RadioVal }});
@@ -91,11 +102,19 @@ const DashboardScreen = (props) => {
         );
       }
 
+
+      useEffect(() => {
+        if (spin) {
+          setTimeout(() => setSpin(false), 2000);
+        }
+      }, [spin]);
+
     return (
+        
         <div className="AppContainer">
+            {spin ? <Loader /> : null}
            <Container fluid
                       className="p-0" 
-                    //   style={{ paddingLeft: 0, paddingRight: 0 }}
            >
            <Navbar bg="light" expand="lg" className="p-3">
                 <Navbar.Brand className='navheadertext' style={{color:'#00008b'}} href="#home">Resume Builder</Navbar.Brand>
@@ -211,7 +230,7 @@ const DashboardScreen = (props) => {
             <div className="footer">
                 <p className='footertext'>Copyright &#169; {currentyear}. All Rights Reserved</p>
             </div>
-        </div>
+            </div>
     );
 }
 

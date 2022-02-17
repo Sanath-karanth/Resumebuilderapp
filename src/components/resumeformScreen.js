@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState , useEffect} from 'react';
 import { Link,useNavigate,useLocation  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faAngleLeft, faUser, faEnvelope, 
@@ -12,6 +12,7 @@ import YearPicker from "react-year-picker";
 import Pdf from "react-to-pdf";
 import { Formik } from 'formik';
 import '../css/resumeform.css'
+import Loader from '../common/loader'
 import { langOptions, educationOptions, monthNames, yearData, 
         yearfromData, yeartoData, roleOptions, summarysuggestOptions } from "../json/json"
 
@@ -23,6 +24,7 @@ function ResumeformScreen(props) {
     const pdffileref = React.createRef();
     const {state} = useLocation();
     let currentyear = moment().format('YYYY');
+    const [spin, setSpin] = useState(true);
     const { resumeid,resumename } = state;
     console.log("resume id is "+resumeid);
     console.log("resume id is "+resumename);
@@ -488,8 +490,15 @@ function ResumeformScreen(props) {
         );
       }
 
+      useEffect(() => {
+        if (spin) {
+          setTimeout(() => setSpin(false), 2000);
+        }
+      }, [spin]);
+
     return (
         <div className="AppContainer">
+            {spin ? <Loader /> : null}
             <Container fluid
                       className="p-0" 
                     //   style={{ paddingLeft: 0, paddingRight: 0 }}
