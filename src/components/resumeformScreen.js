@@ -2,8 +2,9 @@ import React,{useState , useEffect} from 'react';
 import { Link,useNavigate,useLocation  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faAngleLeft, faUser, faEnvelope, 
-         faPhone, faSuitcase,faInfoCircle,faLightbulb, 
-         faGraduationCap, faAward, faCalendar, faBriefcase, faCommentDots, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+         faPhone, faSuitcase,faInfoCircle,
+         faLightbulb,faGraduationCap, faAward, faCalendar, 
+         faBriefcase, faCommentDots, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import {Navbar,Nav,Container,Row,Col,Button,Card,Modal,Tooltip,OverlayTrigger, Accordion} from 'react-bootstrap'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -246,6 +247,10 @@ function ResumeformScreen(props) {
         // navigate(-1)
         // navigate(-2)
         navigate("/home", { replace: true });
+    }
+
+    const feedbackClick = () => {
+        navigate("/feedback");
     }
 
     const fresherClick = () => {
@@ -522,7 +527,7 @@ function ResumeformScreen(props) {
                         <Nav>
                             <Nav.Link 
                                 className='navheadersubtext text-primary' 
-                                href="#home"><FontAwesomeIcon icon={faCommentDots} /> 
+                                onClick={feedbackClick}><FontAwesomeIcon icon={faCommentDots} /> 
                                 {' '}Feedback
                             </Nav.Link>
                         </Nav>

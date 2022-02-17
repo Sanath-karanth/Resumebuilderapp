@@ -52,6 +52,10 @@ const DashboardScreen = (props) => {
         navigate("/resumeform", { replace: true , state: {resumeid: idVal, resumename: RadioVal }});
     }
 
+    const feedbackClick = () => {
+        navigate("/feedback");
+    }
+
     const resumeData = [
         {
             resumeID:97,
@@ -133,7 +137,7 @@ const DashboardScreen = (props) => {
                         <Nav>
                             <Nav.Link 
                                 className='navheadersubtext text-primary' 
-                                href="#home"><FontAwesomeIcon icon={faCommentDots} /> 
+                                onClick={feedbackClick}><FontAwesomeIcon icon={faCommentDots} /> 
                                 {' '}Feedback
                             </Nav.Link>
                         </Nav>
