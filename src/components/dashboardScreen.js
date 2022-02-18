@@ -4,7 +4,7 @@ import {Navbar,Nav,Container,Row,Col,Button,Card,Modal} from 'react-bootstrap'
 import moment from 'moment';
 import logo from '../logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faQuestionCircle, faCommentDots } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faQuestionCircle, faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons'
 import '../css/dashboard.css'
 import Loader from '../common/loader'
 
@@ -16,6 +16,7 @@ const DashboardScreen = (props) => {
     const navigate = useNavigate();
     let currentyear = moment().format('YYYY');
     const [instructionmodalShow, setInstructionmodalShow] = useState(false);
+    const [reviewshow, setReviewshow] = useState(false);
     const [spin, setSpin] = useState(true);
 
     const handleRadioChange = (e) => {
@@ -39,6 +40,18 @@ const DashboardScreen = (props) => {
         setInstructionmodalShow(true)
     }
 
+    const reviewstoreCheck = async() => {
+        let userstorevalue = localStorage.getItem('UserName');
+        if(userstorevalue === "sahanasanathkaranth")
+        {
+            setReviewshow(true);
+        }
+        else
+        {
+            setReviewshow(false);
+        }
+    }
+
     // const proceedClick = () => {
     //     setSpin(true);
     //       const timer = setTimeout(() => {
@@ -54,6 +67,14 @@ const DashboardScreen = (props) => {
 
     const feedbackClick = () => {
         navigate("/feedback");
+    }
+
+    const reviewClick = () => {
+        navigate("/review");
+    }
+
+    const homeClick = () => {
+        navigate("/home");
     }
 
     const resumeData = [
@@ -106,6 +127,9 @@ const DashboardScreen = (props) => {
         );
       }
 
+      useEffect(() => {
+        reviewstoreCheck();
+      },[]);
 
       useEffect(() => {
         if (spin) {
@@ -121,23 +145,38 @@ const DashboardScreen = (props) => {
                       className="p-0" 
            >
            <Navbar bg="light" expand="lg" className="p-3">
-                <Navbar.Brand className='navheadertext' style={{color:'#00008b'}} href="#home">Resume Builder</Navbar.Brand>
+                <Navbar.Brand className='navheadertext' style={{color:'#00008b'}}>Resume Builder</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link className='navheadersubtext' href="#home"><FontAwesomeIcon icon={faHome} /> Home</Nav.Link>
-                        <Nav.Link className='navheadersubtext text-success' 
+                        <Nav.Link 
+                                className='navheadersubtext'
+                                onClick={homeClick}>
+                            <FontAwesomeIcon icon={faHome} />
+                            {' '}Home
+                        </Nav.Link>
+                        <Nav.Link 
+                            className='navheadersubtext ' 
                             onClick={InstructionClick}>
-                            <FontAwesomeIcon icon={faQuestionCircle} /> Instructions
-                    </Nav.Link>
+                                <FontAwesomeIcon icon={faQuestionCircle} color={'green'} />
+                            {' '}Instructions
+                        </Nav.Link>
+                        { reviewshow &&
+                        <Nav.Link className='navheadersubtext ' 
+                            onClick={reviewClick}>
+                                <FontAwesomeIcon icon={faHeart} color={'red'} />
+                            {' '}Reviews
+                        </Nav.Link>
+                        }
                     </Nav>
                 </Navbar.Collapse>
 
                 <Navbar.Collapse className="justify-content-end">
                         <Nav>
                             <Nav.Link 
-                                className='navheadersubtext text-primary' 
-                                onClick={feedbackClick}><FontAwesomeIcon icon={faCommentDots} /> 
+                                className='navheadersubtext ' 
+                                onClick={feedbackClick}>
+                                    <FontAwesomeIcon icon={faCommentDots} color={'blue'} /> 
                                 {' '}Feedback
                             </Nav.Link>
                         </Nav>

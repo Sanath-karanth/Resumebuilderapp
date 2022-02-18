@@ -513,12 +513,17 @@ function ResumeformScreen(props) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link className='navheadersubtext' onClick={() => setModalShow(true)}>
-                        <FontAwesomeIcon size='lg' icon={faAngleLeft} />&nbsp;&nbsp;Back to Home
+                    <Nav.Link 
+                        className='navheadersubtext' 
+                        onClick={() => setModalShow(true)}>
+                        <FontAwesomeIcon size='lg' icon={faAngleLeft} color={'black'} />
+                        &nbsp;&nbsp;Back to Home
                     </Nav.Link>
-                    <Nav.Link className='navheadersubtext text-success' 
+                    <Nav.Link 
+                            className='navheadersubtext' 
                             onClick={InstructionClick}>
-                            <FontAwesomeIcon icon={faQuestionCircle} /> Instructions
+                                <FontAwesomeIcon icon={faQuestionCircle} color={'green'} />
+                            {' '}Instructions
                     </Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
@@ -526,8 +531,9 @@ function ResumeformScreen(props) {
                 <Navbar.Collapse className="justify-content-end">
                         <Nav>
                             <Nav.Link 
-                                className='navheadersubtext text-primary' 
-                                onClick={feedbackClick}><FontAwesomeIcon icon={faCommentDots} /> 
+                                className='navheadersubtext' 
+                                onClick={feedbackClick}>
+                                    <FontAwesomeIcon icon={faCommentDots} color={'blue'} /> 
                                 {' '}Feedback
                             </Nav.Link>
                         </Nav>
