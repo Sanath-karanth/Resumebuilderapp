@@ -2994,7 +2994,7 @@ function ResumeformScreen(props) {
 {/* ------------------   Right side resume fresher starts here -------- */}
 
                         <div style={{paddingLeft:20}}>
-                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} options={options} filename="code-example.pdf">
+                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} options={options} filename="FresherResume.pdf">
                                 {({ toPdf }) => genbuttonvisible === true ? <Button onClick={toPdf} variant="dark" size="md" >
                                                 Generate PDF 
                                                 </Button> : null
@@ -3178,7 +3178,7 @@ function ResumeformScreen(props) {
 {/* ------------------   Right side resume experience starts here -------- */}
 
                         <div style={{paddingLeft:20}}>
-                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} options={options} filename="code-example.pdf">
+                            <Pdf targetRef={pdffileref} x={0} y={0} scale={1.15} options={options} filename="ExperienceResume.pdf">
                                 {({ toPdf }) => genbuttonvisible === true ? <Button onClick={toPdf} variant="dark" size="md" >
                                                 Generate PDF 
                                                 </Button> : null

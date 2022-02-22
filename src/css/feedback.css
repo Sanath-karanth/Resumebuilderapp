@@ -7,6 +7,10 @@
     justify-content: center;
   }
 
+  .ReviewContainer {
+    background-color: #e9e9e9;
+  }
+
 .Loginheadtext {
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
@@ -40,4 +44,15 @@
     font-family: 'Montserrat', sans-serif;
     color: red;
     /* padding-top: 15px; */
+  }
+
+  .emptydataerr{
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: red;
+    /* align-items: center ;
+    justify-content: center;
+    text-align:justify;
+    text-justify: inter-word; */
+    text-align-last:center;
   }
