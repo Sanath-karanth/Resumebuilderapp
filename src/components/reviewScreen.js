@@ -60,7 +60,7 @@ const ReviewScreen = () => {
 
 
     return (
-        <div className="feedbackcontainer h-100 pb-4">
+        <div className="ReviewContainer h-100 pb-4">
 
             <Container fluid className="p-0 mb-4" >
                 <Navbar bg="light" expand="lg" className="p-3 ">
