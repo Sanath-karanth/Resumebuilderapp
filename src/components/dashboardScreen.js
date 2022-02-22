@@ -186,7 +186,7 @@ const DashboardScreen = (props) => {
             </Container>
 
             <Container fluid className="pt-4 pb-4">
-            <p className='mandatoryinfotext'><span className='asteriskkey'>*</span> Please read all the <b>Instructions</b> present within the NavBar before prceed.</p>
+            <p className='mandatoryinfotext'><span className='asteriskkey'>*</span> Please read all the <b>Instructions</b> present within the NavBar before proceed.</p>
             <InstructionsModal
                 show={instructionmodalShow}
                 onHide={() => setInstructionmodalShow(false)}
