@@ -16,6 +16,12 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.mandatoryinfotext{
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+}
+
 input[type="radio"] {  
   /* margin-right: 10px; */
   width: 20%;

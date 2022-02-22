@@ -452,10 +452,11 @@ function ResumeformScreen(props) {
                     <Card.Body>
                         <Card.Text style={{color:'green'}}>
                             <ol>
-                                <li>Please fill all the details in this form to get the complete resume.</li>
+                                <li>Please fill all the details in the form to get the complete resume.</li>
                                 <li>After filling all the detials in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
                                 <li><b><u>Note:</u></b> Resume will be restricted to only one page of PDF. So, Fill the details with short descriptions.</li>
-                                <li>Kindly Request you to please fill the feedback form at the end.</li>
+                                <li>Kindly use <b>Laptop</b>, <b>Desktop</b> or <b>Mobile Desktop Site's</b> Chrome for generating resume with proper PDF layout.</li>
+                                <li>Kindly Request you to please provide your valuable <b>feedback</b> at the end.</li>
                             </ol>
                         </Card.Text>
                     </Card.Body>
