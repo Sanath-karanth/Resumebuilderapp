@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
+import '../css/feedback.css'
+import { useAuth } from "../contexts/AuthContext"
 import {Navbar,Nav, Card, Form, Button, Container,Alert, Row, Col } from 'react-bootstrap';
 import { useNavigate  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faAngleLeft} from '@fortawesome/free-solid-svg-icons'
 import ReactStars from 'react-stars'
 import { Formik } from 'formik';
-import '../css/feedback.css'
-import { useAuth } from "../contexts/AuthContext"
+
 
 function FeedbackScreen() {
 
     const navigate = useNavigate();
-    const { getAlldata,createdata,deletedata } = useAuth();
+    const { createdata } = useAuth();
     const [usernameval, setUsernameval] = useState('');
     const [feedbackval, setFeedbackval] = useState('');
     const [alertshowsuccess, setAlertshowsuccess] = useState(false);
@@ -111,8 +112,8 @@ function FeedbackScreen() {
 
            <Container fluid className='pb-4'>
              <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
+                <Col xs="12" sm="1" md="3" lg="3" xl="4" xxl="4"></Col>
+                <Col xs="12" sm="10" md="6" lg="6" xl="4" xxl="4">
                     <Card className='mt-4 p-2' 
                       style={{width:'100%'}}
                       >
@@ -167,24 +168,17 @@ function FeedbackScreen() {
                                     {errors.feedback}
                                 </div>
                             }
-                            <Form.Group id="password">
-                                <Row style={{marginBottom:-15}} >
-                                    <Col md={2}>
-                                        <Form.Label className="labeltext" >
-                                            Rating 
-                                        </Form.Label>
-                                    </Col>
-                                    <Col 
-                                        md={3} 
-                                        style={{width:'100px'}}
-                                        className='ml-0 pl-0'
-                                        >
-                                        <p>(<span className='ratechange'> {rate} </span>
+                            <Form.Group id="rating">
+                                <div className='rating-cont'>
+                                    <Form.Label className="labeltext" >
+                                        Rating 
+                                    </Form.Label>
+                                    <p>
+                                        (<span className='ratechange'> {rate} </span>
                                         /
-                                        <span className='ratefixed'> 5 </span>)</p>
-                                    </Col>
-                                    <Col md={7}></Col>
-                                </Row>
+                                        <span className='ratefixed'> 5 </span>)
+                                    </p>
+                                </div>
                                 
                                 <ReactStars
                                     count={5}
@@ -196,7 +190,6 @@ function FeedbackScreen() {
                             
                             <Button type="submit"
                                     onClick={handleSubmit}
-                                    // onClick={() => handleSubmit()} 
                                     className="w-100 mt-4 mb-2 buttontext">SUBMIT
                             </Button>
                         </Form>
@@ -205,7 +198,7 @@ function FeedbackScreen() {
                     </Card.Body>
                     </Card>
                     </Col>
-                    <Col md={4}></Col>
+                    <Col xs="12" sm="1" md="3" lg="3" xl="4" xxl="4"></Col>
                 </Row>
            </Container>
         </div>

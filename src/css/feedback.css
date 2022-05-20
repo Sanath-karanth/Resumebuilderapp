@@ -1,6 +1,4 @@
 .feedbackcontainer{
-    /* display: flex; */
-    /* height: 'auto'; */
     min-height: 100vh;
     width: 100%;
     align-items: center;
@@ -21,7 +19,10 @@
 .labeltext {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: -20px;
+    letter-spacing: 0px;
+    opacity: 1;
+    padding-right: 5px;
+    margin: 0;
   }
 
   #placeholdertext {
@@ -33,27 +34,32 @@
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
+    margin: 0;
   }
 
   .ratefixed {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
+    margin: 0;
   }
 
   .errortext {
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     color: red;
-    /* padding-top: 15px; */
+    margin: 0;
   }
 
   .emptydataerr{
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
     color: red;
-    /* align-items: center ;
-    justify-content: center;
-    text-align:justify;
-    text-justify: inter-word; */
     text-align-last:center;
+    margin: 0;
   }
+.rating-cont{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+}

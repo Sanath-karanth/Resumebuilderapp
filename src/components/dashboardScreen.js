@@ -1,15 +1,15 @@
-import React, { Fragment,useState, useEffect } from 'react';
-import { Link,useNavigate  } from "react-router-dom";
-import {Navbar,Nav,Container,Row,Col,Button,Card,Modal} from 'react-bootstrap'
-import moment from 'moment';
-import logo from '../logo.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faQuestionCircle, faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons'
+import React, { useState, useEffect } from 'react';
 import '../css/dashboard.css'
 import Loader from '../common/loader'
+import { useNavigate  } from "react-router-dom";
+import {Navbar,Nav,Container,Row,Col,Button,Card,Modal} from 'react-bootstrap'
+import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faQuestionCircle, faCommentDots, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 
-const DashboardScreen = (props) => {
+
+const DashboardScreen = () => {
 
     const [RadioVal, setRadioVal] = useState('Resume 1');
     const [idVal, setIdVal] = useState(97);
@@ -42,7 +42,7 @@ const DashboardScreen = (props) => {
 
     const reviewstoreCheck = async() => {
         let userstorevalue = localStorage.getItem('UserName');
-        if(userstorevalue === "sahanasanathkaranth")
+        if(userstorevalue === "sanathorthotech")
         {
             setReviewshow(true);
         }
@@ -51,15 +51,6 @@ const DashboardScreen = (props) => {
             setReviewshow(false);
         }
     }
-
-    // const proceedClick = () => {
-    //     setSpin(true);
-    //       const timer = setTimeout(() => {
-    //         setSpin(false);
-    //         navigate("/resumeform", { replace: true , state: {resumeid: idVal, resumename: RadioVal }});
-    //       }, 2000);
-    //       return () => clearTimeout(timer);
-    // }
 
     const proceedClick = () => {
         navigate("/resumeform", { replace: true , state: {resumeid: idVal, resumename: RadioVal }});
@@ -112,7 +103,7 @@ const DashboardScreen = (props) => {
                         <Card.Text style={{color:'green'}}>
                             <ol>
                                 <li>Please fill all the details in the form to get the complete resume.</li>
-                                <li>After filling all the detials in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
+                                <li>After filling all the details in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
                                 <li><b><u>Note:</u></b> Resume will be restricted to only one page of PDF. So, Fill the details with short descriptions.</li>
                                 <li>Kindly use <b>Laptop</b>, <b>Desktop</b> or <b>Mobile Desktop Site's</b> Chrome for generating resume with proper PDF layout.</li>
                                 <li>Kindly Request you to please provide your valuable <b>feedback</b> at the end.</li>
@@ -186,13 +177,13 @@ const DashboardScreen = (props) => {
             </Container>
 
             <Container fluid className="pt-4 pb-4">
-            <p className='mandatoryinfotext'><span className='asteriskkey'>*</span> Please read all the <b>Instructions</b> present within the NavBar before proceed.</p>
+            <p className='mandatoryinfotext'><span className='asteriskkey'>*</span> Please read all the <b>Instructions</b> present within the Menubar before proceed!</p>
             <InstructionsModal
                 show={instructionmodalShow}
                 onHide={() => setInstructionmodalShow(false)}
             />
                 <Row>
-                    <Col sm={4}>
+                    <Col xs="12" sm="5" md="4" lg="4" xl="4" xxl="4">
                         <Card>
                             <Card.Body>
                                 <p className='selecttext'>Select the Resume:</p>
@@ -223,13 +214,10 @@ const DashboardScreen = (props) => {
                         </div>
                         
                     </Col>
-                    <Col sm={8}>
+                    <Col xs="12" sm="7" md="8" lg="8" xl="8" xxl="8">
                         <Card>
                            <div
                             style={{
-                                // height: '50rem',
-                                // width: '50rem',
-                                // margin: 50 ,
                                 padding:50,
                                 justifyContent:'center',
                                 alignItems:'center',
@@ -251,22 +239,8 @@ const DashboardScreen = (props) => {
                                     </img>)
                                 })}
                                </Card> 
-                            {/* <embed
-                                src={'./sample.pdf'}
-                                type="application/pdf"
-                                height={600}
-                                // width={600}
-                                width="100%"
-                            /> */}
-                        </div>
+                            </div>
                         </Card>
-                        {/* <div
-                            style={{
-                                height: '50rem',
-                                width: '50rem',
-                                margin: '1rem auto',
-                            }}>
-                        </div> */}
                     </Col>
                 </Row>
                 

@@ -1,25 +1,26 @@
 import React,{useState , useEffect} from 'react';
-import { Link,useNavigate,useLocation  } from "react-router-dom";
+import '../css/resumeform.css'
+import Loader from '../common/loader'
+import { useNavigate,useLocation  } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faAngleLeft, faUser, faEnvelope, 
+import { faAngleLeft, faUser, faEnvelope, 
          faPhone, faSuitcase,faInfoCircle,
-         faLightbulb,faGraduationCap, faAward, faCalendar, 
-         faBriefcase, faCommentDots, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+         faLightbulb,faGraduationCap, faAward, 
+         faCalendar, faBriefcase, faCommentDots, 
+         faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import {Navbar,Nav,Container,Row,Col,Button,Card,Modal,Tooltip,OverlayTrigger, Accordion} from 'react-bootstrap'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import moment from 'moment';
-import YearPicker from "react-year-picker";
 import Pdf from "react-to-pdf";
 import { Formik } from 'formik';
-import '../css/resumeform.css'
-import Loader from '../common/loader'
+
 import { langOptions, educationOptions, monthNames, yearData, 
         yearfromData, yeartoData, roleOptions, summarysuggestOptions } from "../json/json"
 
 const animatedComponents = makeAnimated();
 
-function ResumeformScreen(props) {
+function ResumeformScreen() {
 
     const navigate = useNavigate();
     const pdffileref = React.createRef();
@@ -40,7 +41,6 @@ function ResumeformScreen(props) {
     const [progSelectval, setProgSelectval] = useState('');
     const [eduSelectval, setEduSelectval] = useState('B.E');
     const [monthfrom, setMonthfrom] = useState('January');
-    const [monthto, setMonthto] = useState('');
     const [certificateMonth, setCertificateMonth] = useState('January');
     const [certificateYear, setCertificateyear] = useState('2020');
     const [yearfromval, setFromyearval] = useState('2015');
@@ -130,7 +130,7 @@ function ResumeformScreen(props) {
     };
 
 
-    const programSelect = (newValue, actionMeta) => {
+    const programSelect = (newValue) => {
         if (newValue === null || newValue == '') {
             newValue = [0];
             setSkillnullfresher(true);
@@ -148,14 +148,6 @@ function ResumeformScreen(props) {
           setIsselectLoading(false);
     }
 
-    const yearfromSelect = (date) => {
-        setFromyearval(date);
-    }
-
-    const yeartoSelect = (date) => {
-        setToyearval(date);
-    }
-
     const educationSelect = (e) => {
         console.log(e.target.value);
         setEduSelectval(e.target.value);
@@ -169,9 +161,6 @@ function ResumeformScreen(props) {
         setMonthfrom(e.target.value);
     }
 
-    const monthtoSelect = (e) => {
-        setMonthto(e.target.value);
-    }
 
     const workonemonthfromSelect = (e) => {
         setWorkonemonthfromval(e.target.value);
@@ -244,8 +233,6 @@ function ResumeformScreen(props) {
     
     const backClick = (event) => {
         event.preventDefault();
-        // navigate(-1)
-        // navigate(-2)
         navigate("/home", { replace: true });
     }
 
@@ -327,13 +314,13 @@ function ResumeformScreen(props) {
 
         if (!values.fprojectonename) {
             errors.fprojectonename = 'Project name is required!';
-            }else if (!/^[A-Za-z\b ]+$/.test(values.fprojectonename)) {
+            }else if (!/^[A-Za-z0-9\&\,\-\_\b ]+$/.test(values.fprojectonename)) {
             errors.fprojectonename = 'Please enter a Valid Alphanumerical Characters only.';
         }
 
         if (!values.fprojectonerole) {
             errors.fprojectonerole = 'Project Role is required!';
-            }else if (!/^[A-Za-z\b ]+$/.test(values.fprojectonerole)) {
+            }else if (!/^[A-Za-z\-\b ]+$/.test(values.fprojectonerole)) {
             errors.fprojectonerole = 'Please enter a Valid Alphanumerical Characters only.';
         }
 
@@ -367,7 +354,7 @@ function ResumeformScreen(props) {
 
         if (!values.fcoursename) {
             errors.fcoursename = 'Course name is required!';
-            }else if (!/^[A-Za-z\b ]+$/.test(values.fcoursename)) {
+            }else if (!/^[A-Za-z0-9\-\_\b ]+$/.test(values.fcoursename)) {
             errors.fcoursename = 'Please enter a valid Alpha Characters only.';
         }
 
@@ -453,7 +440,7 @@ function ResumeformScreen(props) {
                         <Card.Text style={{color:'green'}}>
                             <ol>
                                 <li>Please fill all the details in the form to get the complete resume.</li>
-                                <li>After filling all the detials in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
+                                <li>After filling all the details in the form, Go to the end of the form and click the button to get the Generate PDF button.</li>
                                 <li><b><u>Note:</u></b> Resume will be restricted to only one page of PDF. So, Fill the details with short descriptions.</li>
                                 <li>Kindly use <b>Laptop</b>, <b>Desktop</b> or <b>Mobile Desktop Site's</b> Chrome for generating resume with proper PDF layout.</li>
                                 <li>Kindly Request you to please provide your valuable <b>feedback</b> at the end.</li>
@@ -474,7 +461,6 @@ function ResumeformScreen(props) {
           <Modal
             {...props}
             size="sm"
-            // backdrop={true}
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
@@ -507,7 +493,6 @@ function ResumeformScreen(props) {
             {spin ? <Loader /> : null}
             <Container fluid
                       className="p-0" 
-                    //   style={{ paddingLeft: 0, paddingRight: 0 }}
            >
            <Navbar bg="light" expand="lg" className="p-3">
                 <Navbar.Brand className='navheadertext' style={{color:'#00008b'}}>Resume Builder</Navbar.Brand>
@@ -555,7 +540,7 @@ function ResumeformScreen(props) {
                 onHide={() => setInstructionmodalShow(false)}
             />
                 <Row>
-                    <Col md={5}>
+                    <Col xs="12" sm="12" md="5" lg="5" xl="5" xxl="5">
                         <Card className='leftContainer'>
                             
                             <div className='p-4'>
@@ -747,33 +732,15 @@ function ResumeformScreen(props) {
                                     <div className="row mb-4 mt-4">
                                     <p className='leftcardskilltext text-info'>Select your skills <span className='asteriskkey'>*</span></p>
                                         <div className="col-md-12 mb-0">
-                                            {/* <label htmlFor="lastname" className="pb-2">Phone No:</label> */}
-                                            {/* <select className="form-control form-select"
-                                                    onChange={programSelect}
-                                                    value={progSelectval}
-                                                    multiple={true}
-                                                    >
-                                                 {programmingSkills.map((item,keyindex) => {
-                                                     return(
-                                                     <option key={keyindex} 
-                                                             value={item.langval}>
-                                                         {item.langname}
-                                                     </option>)
-                                                 })} 
-                                            </select> */}
                                             <Select
                                                 closeMenuOnSelect={true}
-                                                isMulti
                                                 isClearable={false}
-                                                // onMenuClose={toggleLoading}
                                                 isLoading={isselectLoading}
                                                 components={animatedComponents}
-                                                // defaultValue={[colourOptions[4], colourOptions[5]]}
                                                 onChange={programSelect}
                                                 isMulti
                                                 options={langOptions}
-                                            />
-                                            {/* <span>Selected option: {progSelectval}</span> */}
+                                            ></Select>
                                         </div>
                                         { skillnullfresher === true &&
                                                 <div className='errortext pt-3'>
@@ -1253,21 +1220,6 @@ function ResumeformScreen(props) {
                                                     })} 
                                             </select>
                                         </div>
-                                        {/* <div className="col-md-6">
-                                            <label htmlFor="degree" className="pt-2 pb-2">Month To: </label>  
-                                            <select className="form-control form-select"
-                                                    onChange={monthtoSelect}
-                                                    value={monthto}
-                                                    >
-                                                    {monthNames.map((item,keyindex) => {
-                                                        return(
-                                                        <option key={keyindex} 
-                                                                value={item.month}>
-                                                            {item.label}
-                                                        </option>)
-                                                    })} 
-                                            </select>
-                                        </div> */}
                                     </div>
 
                                     <div className="row mb-4">
@@ -1304,9 +1256,6 @@ function ResumeformScreen(props) {
                                         <div className="col-md-6 pb-2">
                                             <label htmlFor="yearto" className="pb-2">Year To:</label>
                                             <div className="input-group h-50">
-                                            {/* <YearPicker 
-                                                onChange={yeartoSelect} 
-                                            /> */}
                                             <div className="input-group">
                                                 <div className="input-group-prepend">
                                                     <div className="input-group-text h-100">
@@ -1490,7 +1439,6 @@ function ResumeformScreen(props) {
                                                 type="text" 
                                                 className="form-control" 
                                                 placeholder="Full name"
-                                                // autocomplete="off"
                                                 onChange={(e) => {
                                                     handleChange(e);
                                                     setFullnamefresher(e.target.value)}
@@ -1629,17 +1577,13 @@ function ResumeformScreen(props) {
                                     <div className="col-md-12 mb-0">
                                         <Select
                                             closeMenuOnSelect={true}
-                                            isMulti
                                             isClearable={false}
-                                            // onMenuClose={toggleLoading}
                                             isLoading={isselectLoading}
                                             components={animatedComponents}
-                                            // defaultValue={[colourOptions[4], colourOptions[5]]}
                                             onChange={programSelect}
                                             isMulti
                                             options={langOptions}
-                                        />
-                                        {/* <span>Selected option: {progSelectval}</span> */}
+                                        ></Select>
                                     </div>
                                     { skillnullfresher === true &&
                                             <div className='errortext pt-3'>
@@ -2797,30 +2741,12 @@ function ResumeformScreen(props) {
                                                 })} 
                                         </select>
                                     </div>
-                                    {/* <div className="col-md-6">
-                                        <label htmlFor="degree" className="pt-2 pb-2">Month To: </label>  
-                                        <select className="form-control form-select"
-                                                onChange={monthtoSelect}
-                                                value={monthto}
-                                                >
-                                                {monthNames.map((item,keyindex) => {
-                                                    return(
-                                                    <option key={keyindex} 
-                                                            value={item.month}>
-                                                        {item.label}
-                                                    </option>)
-                                                })} 
-                                        </select>
-                                    </div> */}
                                 </div>
 
                                 <div className="row mb-4">
                                     <div className="col-md-6 pb-2">
                                         <label htmlFor="yearfrom" className="pb-2">Year From:</label>
                                         <div className="input-group h-50">
-                                        {/* <YearPicker 
-                                            onChange={yearfromSelect} 
-                                        /> */}
                                         <div className="input-group">
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text h-100">
@@ -2848,9 +2774,6 @@ function ResumeformScreen(props) {
                                     <div className="col-md-6 pb-2">
                                         <label htmlFor="yearto" className="pb-2">Year To:</label>
                                         <div className="input-group h-50">
-                                        {/* <YearPicker 
-                                            onChange={yeartoSelect} 
-                                        /> */}
                                         <div className="input-group">
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text h-100">
@@ -2988,7 +2911,7 @@ function ResumeformScreen(props) {
                             </div>
                         </Card>
                     </Col>
-                    <Col md={7}>
+                    <Col xs="12" sm="12" md="7" lg="7" xl="7" xxl="7">
                         <Card className='p-4'>
                         {fresherForm ?
                         <>
